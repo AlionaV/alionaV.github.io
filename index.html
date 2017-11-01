@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -438,11 +439,15 @@ Your browser does not support the HTML5 canvas tag.</canvas>
         var t = document.createTextNode(text);
         para.appendChild(t);
         document.getElementById("m1").appendChild(para);
+		clearlayer(canvas);
+		clearlayer(canvas2);
     }
 
     function clearresults() {
         document.getElementById("m1").innerHTML = "";
         clearlayer(ctx1);
+		clearlayer(canvas);
+		clearlayer(canvas2);
     }
 
     function cie_to_rgb(x, y, brightness) {
