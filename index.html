@@ -313,10 +313,8 @@ Your browser does not support the HTML5 canvas tag.</canvas>
         var s = document.createTextNode("  ");
         pal.appendChild(s);
         document.getElementById("m1").appendChild(pal);
-		printresult('Purity: ' + Purt);
         printresult('Dominant wavelength: ' + lambdat);
-        
-
+       	printresult('Purity: ' + Purt); 
     }
 
     function pfff(x0p, y0p) {
@@ -440,8 +438,6 @@ Your browser does not support the HTML5 canvas tag.</canvas>
         var t = document.createTextNode(text);
         para.appendChild(t);
         document.getElementById("m1").appendChild(para);
-		clearlayer(canvas);
-		clearlayer(canvas2);
     }
 
     function clearresults() {
