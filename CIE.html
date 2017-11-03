@@ -198,6 +198,7 @@ color-mapping functions as an average human\'s chromatic response within a 2 deg
 According to CIE standard, a complete display of colors is three-dimensional. Distinguishable colors are inside conic surface in 
 the three-dimensional metric space X, Y, Z.    </p> -->
 </div>
+<img alt="CIE plot" id = "CIE" src = "https://alionav.github.io/530.jpg" style="display:none;">
 <script>
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -251,11 +252,6 @@ return (xx * (y01 - y02)) / (x01 - x02) + y02 - (x02 * (y01 - y02)) / (x01 - x02
 //Drawing clear CIE plot
 function clearcie() {
 
-if (window.innerWidth > 500){
-ch = 1;
-} else {
-ch = 0;
-}
 	
 ctx.beginPath();
 ctx.moveTo(px(0), py(0));
@@ -325,8 +321,14 @@ ctx.font = '18pt Arial';
 ctx.fillStyle = 'black';
 ctx.fillText("CIE 1931", 380, 50);
 }
+if (window.innerWidth > 500){
 clearcie();
+}
+else {
 
+    var img = document.getElementById("CIE");
+    ctx.drawImage(img,0, 0, 530, 530);
+}
 
 //Printing results (button has been clicked)
 var lambdat, Purt;
