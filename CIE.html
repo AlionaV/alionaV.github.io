@@ -199,6 +199,211 @@ According to CIE standard, a complete display of colors is three-dimensional. Di
 the three-dimensional metric space X, Y, Z.    </p> -->
 </div>
 <img alt="CIE plot" id = "CIE" src = "https://alionav.github.io/530.jpg" style="display:none;">
+<script src="https://alionav.github.io/js/CIEcalc.js">
+</script>
+ 
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.16.5/math.min.js"></script> </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {font-family: Arial;
+              margin:0;
+        }
+              
+        #stage {
+                width: 530px;
+                height: 530px;
+                position: relative;
+                }
+        canvas { position: absolute; 
+                 cursor: pointer;
+				 width: 530px; 
+				 height: 530px;
+        }
+        #wavelength{ z-index: 3; }
+        #position{ z-index: 4; }
+        #layer1 { z-index: 2; }
+        #myCanvas { z-index: 1; }
+        .con {width:530px; height:530px;}
+        .container{margin-left: 10px; margin-top: 10px; padding-top: 20px;}
+        .button {
+                background-color: #595959;
+                border: none;
+                color: white;
+                padding: 10px 10px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 4px;
+                }
+			.button:hover {
+                background-color: black;
+                }
+
+        .panel {
+                list-style-type: none;
+                margin: 0;
+                padding-left: 150px;
+                padding-top: 20px;
+                overflow: hidden;
+                background-color: #f2f2f2;
+                height: 150px;
+                width: 100%;
+                
+                
+        }
+		.panel-text {
+				list-style-type: none;
+                margin: 0;
+                padding-left: 50px;
+				padding-right: 20px;
+                padding-top: 50px;
+				padding-bottom: 50px;
+                overflow: hidden;
+                background-color: #f2f2f2;
+
+                width: 100%;
+				font-size:120%;
+				text-align:justify;
+		}			
+        div.form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 500px; 
+            font-size: large;
+        }
+        
+        input[type=text], text{
+            width: 100%;
+            padding: 8px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        div.log {
+            background-color: white;
+            width: 95%;
+            height: 200px;
+            border: 1px solid #ccc;
+            overflow: scroll;
+            margin: 10px;
+            padding: 5px;
+        }
+		.adj {max-width: 500px;}
+		p {
+		margin-top: 1px;
+		margin-bottom: 1px;
+		}
+		p.main{ font-size:50px;}
+		p.submain{font-size: 30px;}
+		.mycol{float:left;width:100%;}
+		.content{max-width:1200px;margin:auto}
+		.spacer{height:20px;
+				margin: 0;
+                padding-left: 150px;
+                padding-top: 20px;
+                overflow: hidden;
+				}
+		.row:before,.row:after{content:"";display:table;clear:both}	
+		
+@media screen and (max-width: 500px) {
+
+    .container{margin-left: 5px; margin-right: 5px; margin-top: 10px; padding-top: 20px;}
+	 div.form {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            width: 375px; 
+            font-size: large;
+    }
+	.panel {
+			padding-left: 10px;
+	}	
+	.panel-text {
+			padding-left: 10px;
+	}	
+	        #stage {
+                width: 400px;
+                height: 400px;
+                position: relative;
+                }
+    canvas { position: absolute; 
+                 cursor: pointer;
+				 width: 400px; 
+				 height: 400px;
+				 
+    }
+	.adj {width: 400px;}
+
+}
+
+@media screen and (max-width: 650px) {
+	p.main{font-size:30px;}
+	p.submain{font-size: 20px;}
+		.panel {
+			padding-top: 10px;
+			height: 100px;
+			padding-left: 20px;		
+	}	
+	.mobile{display:block;
+			width:100%!important}
+}
+     </style>
+</head>
+<body>
+<div class="panel"><p class="main">Chromaticity diagram:</p><p class="submain">Interactive CIE plot and calculator</p></div>
+
+<div class="row content">
+<div class="mycol container" style="width: 550px;">
+<div id="stage" style="con">
+    <canvas id="myCanvas" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+    <canvas id="layer1" style="background-color: transparent;"></canvas>
+    <canvas id="position" style="background-color: transparent;"></canvas>
+    <canvas id="wavelength" style="background-color: transparent;"></canvas>
+
+</div>
+    
+</div>
+
+<div class="mycol container adj">
+     <div class="form"><p style="color: gray; padding: 10px; font-size: 120%; ">Enter CIE coordinates:</p>
+     <input name="inputx" id="myx" type="text" placeholder="Enter X or x"><br>
+     <input name="inputy" id="myy" type="text" placeholder="Enter Y or y"><br>
+	 <input name="inputz" id="mzz" type="text" placeholder="Enter Z (Z = 1 - x - y) or nothing">
+     <br>
+     <button type="button" class="button mobile" onclick='pResults1()'>Calculate</button>
+     <button type="button" class="button mobile" onclick='clearresults()'>Clear results</button>
+     <div class="log" id="m1">
+</div>
+</div>
+</div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="panel-text" style="height:150px;">
+<!--  <p class="main"></p><p class = "content">
+ The CIE 1931 color space, a conventional reference for other color spaces, has been developed in 1931 by International Commission 
+on Illumination  and is still used as a standard for color definition. It is based on data measured for human observers and a 
+2-degree field of view (using colorimeter) by David Wright and John Guild. Due to the distribution of color-sensible photoreceptors 
+in the human eye, the tristimulus values depend on the observer's field of view. Wright's and Guild's experiments had defined a 
+color-mapping functions as an average human\'s chromatic response within a 2 degree arc inside the fovea.  Thus obtained dependences 
+(between chromatic response and wavelength) called the CIE 1931 Standard Observer functions or  CIE 1931 2 degree Standard Observer. 
+According to CIE standard, a complete display of colors is three-dimensional. Distinguishable colors are inside conic surface in 
+the three-dimensional metric space X, Y, Z.    </p> -->
+</div>
+<img alt="CIE plot" id = "CIE" src = "https://alionav.github.io/530.jpg" style="display:none;">
 <script>
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
