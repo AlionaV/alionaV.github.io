@@ -83,7 +83,7 @@
                 margin: 0;
                 padding-left: 50px;
 				padding-right: 20px;
-                padding-top: 50px;
+                padding-top: 120px;
 				padding-bottom: 50px;
                 overflow: hidden;
                 background-color: #f2f2f2;
@@ -99,7 +99,7 @@
             width: 500px; 
             font-size: large;
         }
-        
+        .button:disabled{cursor:not-allowed;opacity:0.3;}
         input[type=text], text{
             width: 100%;
             padding: 8px 20px;
@@ -150,6 +150,7 @@
 	}	
 	.panel-text {
 			padding-left: 10px;
+			padding-top: 20px
 	}	
 	        #stage {
                 width: 400px;
@@ -163,8 +164,8 @@
 				 
     }
 	.adj {width: 400px;}
-	.button:disabled{cursor:not-allowed;opacity:0.3;}
 
+	
 
 }
 
@@ -178,6 +179,10 @@
 	}	
 	.mobile{display:block;
 			width:100%!important}
+	.content{max-width: 400px;}		
+}
+@media screen and (max-width: 360px) {
+	.content{max-width: 350px;}		
 }
      </style>
 <script> 
@@ -235,7 +240,7 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
 <div class="spacer"></div>
 
-<div class="panel-text" style="color:#f2f2f2;">
+<div class="panel-text"> <!--style="color:#f2f2f2;"-->
   <p class="main"></p><p class = "content">
 The CIE 1931 color space, a conventional reference for other color spaces, has been developed in 1931 by International Commission on 
  Illumination  and is still used as a standard for color definition. It is based on data measured for human observers and a 2-degree field 
