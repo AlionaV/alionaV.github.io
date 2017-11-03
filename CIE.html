@@ -242,15 +242,19 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
 <div class="panel-text"> <!--style="color:#f2f2f2;"-->
   <p class="main"></p><p class = "content">
-The CIE 1931 color space, a conventional reference for other color spaces, has been developed in 1931 by International Commission on 
- Illumination  and is still used as a standard for color definition. It is based on data measured for human observers and a 2-degree field 
- of view (using colorimeter) by David Wright and John Guild. Due to the distribution of color-sensitive photoreceptors in the human eye, 
- the tristimulus values depend on the observer's field of view. Wright's and Guild's experiments had defined a 
-color-mapping functions as an average human's chromatic response within a 2 degree arc inside the fovea.  Thus obtained dependences 
-(between chromatic response and wavelength) called the CIE 1931 Standard Observer functions or  CIE 1931 2 degree Standard Observer. 
-According to CIE standard, distinguishable colors are inside conic surface in 
-the three-dimensional metric space X, Y, Z, CIE color space. Color coordinates when photoluminescence spectra is measured can be obtained as follows
-
+The CIE 1931 color space, a conventional reference for other color spaces, 
+has been developed in 1931 by International Commission on Illumination and is
+ still used as a standard for color definition. It is based on data measured for
+ human observers for 2-degree field of view (using colorimeter) by David Wright 
+ and John Guild. Due to the distribution of color-sensitive photoreceptors in the 
+ human eye, the tristimulus values depend on the observer's field of view. Wright's 
+ and Guild's experiments had defined a color-mapping functions as an average human's
+ chromatic response within a 2 deg. arc inside the fovea. Thus obtained dependences 
+ (between chromatic response and wavelength) called the CIE 1931 Standard Observer 
+ functions or CIE 1931 2 deg. Standard Observer. According to CIE standard, 
+ distinguishable colors are inside conic surface in the three-dimensional 
+ metric space X, Y, Z, CIE color space. Color coordinates when 
+ photoluminescence spectra is measured can be obtained as follows 
 \begin{equation} 
 X(\lambda) = \int I(\lambda) \widetilde{x}(\lambda) d\lambda \\
 Y(\lambda) = \int I(\lambda) \widetilde{y}(\lambda) d\lambda \\
@@ -262,7 +266,7 @@ Z(\lambda) = \int I(\lambda) \widetilde{z}(\lambda) d\lambda
 The boundary of the coned area of distinguishable colors in the CIE space matches with spectrally pure colors, i.e. 
 coordinates that calculated for spectra with single narrow peak at a particular wavelength. 
 As far as plane cross-sections of the color area defined as X+Y+Z = const contain colors at same brightness, 
-it is possible to omit one of the coordinates from X, Y or Z and consider only two linearly independent coordinates instead. 
+it is possible to omit one of the coordinates from \(X,\) \(Y\) or \(Z\) and consider only two linearly independent coordinates instead. 
 Let's specify new variables and move to the new coordinate system:
 \begin{equation} 
 x = \frac{X}{X+Y+Z} \\
@@ -270,8 +274,8 @@ y = \frac{Y}{X+Y+Z}  \\
 z = \frac{Z}{X+Y+Z}  
 
 \end{equation}
-It is evidently that z = 1 - x - y and can be excluded from further considerations. 
-The new coordinate system {x, y} in the two dimensional space sets an area of colors at the same brightness 
+It is evidently that \(z = 1 - x - y\) and can be excluded from further considerations. 
+The new coordinate system {\(x\), \(y\)} in the two dimensional space sets an area of colors at the same brightness 
 that called CIE diagram or CIE plot. 
 Deformed arc-shaped curve confining the color field is called spectral locus and reproduces spectrally 
 pure colors of monochromatic emissions with a wavelength from 380 to 780 mm.
