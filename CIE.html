@@ -54,6 +54,20 @@
                 
                 
         }
+		.panel-text {
+				list-style-type: none;
+                margin: 0;
+                padding-left: 50px;
+				padding-right: 20px;
+                padding-top: 50px;
+				padding-bottom: 50px;
+                overflow: hidden;
+                background-color: #f2f2f2;
+
+                width: 100%;
+				font-size:120%;
+				text-align:justify;
+		}			
         div.form {
             border-radius: 5px;
             background-color: #f2f2f2;
@@ -108,6 +122,9 @@
             font-size: large;
     }
 	.panel {
+			padding-left: 10px;
+	}	
+	.panel-text {
 			padding-left: 10px;
 	}	
 	        #stage {
@@ -170,7 +187,17 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
 <div class="spacer"></div>
 
-<div class="panel"><p class="main"></p><p class="submain"></p></div>
+<div class="panel-text" style="height:150px;">
+<!--  <p class="main"></p><p class = "content">
+ The CIE 1931 color space, a conventional reference for other color spaces, has been developed in 1931 by International Commission 
+on Illumination  and is still used as a standard for color definition. It is based on data measured for human observers and a 
+2-degree field of view (using colorimeter) by David Wright and John Guild. Due to the distribution of color-sensible photoreceptors 
+in the human eye, the tristimulus values depend on the observer's field of view. Wright's and Guild's experiments had defined a 
+color-mapping functions as an average human\'s chromatic response within a 2 degree arc inside the fovea.  Thus obtained dependences 
+(between chromatic response and wavelength) called the CIE 1931 Standard Observer functions or  CIE 1931 2 degree Standard Observer. 
+According to CIE standard, a complete display of colors is three-dimensional. Distinguishable colors are inside conic surface in 
+the three-dimensional metric space X, Y, Z.    </p> -->
+</div>
 <script>
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -329,7 +356,7 @@ function Catculate(x0p, y0p) {
 var h, l, x0p, y0p;
 if (y0p > linef(0.3127, 0.3291, xl(380), yl(380), x0p) & x0p < 0.3127 | y0p > linef(0.3127, 0.3291, xl(780), yl(780), x0p) & x0p >= 0.3127) {
 if (x0p < 0.3127) {
-l = 430;
+l = 380;
 do {
 l = l + 0.1;
 h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
@@ -340,9 +367,15 @@ do {
 l = l + 0.01;
 h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
 }
-while (h > 0.001 & l < 554.6);
+while (h > 0.001);
+l = l - 0.01;
+do {
+l = l + 0.001;
+h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
+}
+while (h > 0.001);
 } else {
-l = 532.1;
+l = 543.0;
 do {
 l = l + 0.1;
 h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
@@ -350,10 +383,10 @@ h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
 while (h > 0.01);
 l = l - 0.1;
 do {
-l = l + 0.01;
+l = l + 0.001;
 h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
 }
-while (h > 0.001 & l < 554.6);
+while (h > 0.001);
 
 }
 Pur = Math.round(dis(x0p, y0p, 0.3127, 0.3291) / dis(0.3127, 0.3291, xl(l), yl(l)) * 100);
