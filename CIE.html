@@ -2,7 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.16.5/math.min.js"></script>-->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.16.5/math.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript" async="">
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {font-family: Arial;
@@ -139,6 +145,8 @@
 				 
     }
 	.adj {width: 400px;}
+	.button:disabled{cursor:not-allowed;opacity:0.3;}
+
 
 }
 
@@ -154,8 +162,17 @@
 			width:100%!important}
 }
      </style>
-</head>
-<body>
+<script> 
+
+function inputvaluechecker(){
+   if (isNaN(parseFloat(document.getElementById("myx").value))) {document.getElementById("b1").disabled = true;} else {document.getElementById("b1").disabled = false;}
+
+   if (isNaN(parseFloat(document.getElementById("myy").value))) {document.getElementById("b1").disabled = true;} else {document.getElementById("b1").disabled = false;}
+}
+ </script>
+	 </head>
+
+<body onload = "inputvaluechecker()">
 <div class="panel"><p class="main">Chromaticity diagram:</p><p class="submain">Interactive CIE plot and calculator</p></div>
 
 <div class="row content">
@@ -173,12 +190,12 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
 <div class="mycol container adj">
      <div class="form"><p style="color: gray; padding: 10px; font-size: 120%; ">Enter CIE coordinates:</p>
-     <input name="inputx" id="myx" type="text" placeholder="Enter X or x"><br>
-     <input name="inputy" id="myy" type="text" placeholder="Enter Y or y"><br>
+     <input name="inputx" id="myx" type="text" onchange = "inputvaluechecker()"  placeholder="Enter X or x"><br>
+     <input name="inputy" id="myy" type="text" onchange = "inputvaluechecker()"  placeholder="Enter Y or y"><br>
 	 <input name="inputz" id="mzz" type="text" placeholder="Enter Z (Z = 1 - x - y) or nothing">
      <br>
-     <button type="button" class="button mobile" onclick='pResults1()'>Calculate</button>
-     <button type="button" class="button mobile" onclick='clearresults()'>Clear results</button>
+     <button type="button" class="button mobile" id="b1" onclick='pResults1()'>Calculate</button>
+     <button type="button" class="button mobile" id="b2" onclick='clearresults()'>Clear results</button>
      <div class="log" id="m1">
 </div>
 </div>
@@ -187,16 +204,43 @@ Your browser does not support the HTML5 canvas tag.</canvas>
 
 <div class="spacer"></div>
 
-<div class="panel-text" style="height:150px;">
-<!--  <p class="main"></p><p class = "content">
- The CIE 1931 color space, a conventional reference for other color spaces, has been developed in 1931 by International Commission 
-on Illumination  and is still used as a standard for color definition. It is based on data measured for human observers and a 
-2-degree field of view (using colorimeter) by David Wright and John Guild. Due to the distribution of color-sensible photoreceptors 
-in the human eye, the tristimulus values depend on the observer's field of view. Wright's and Guild's experiments had defined a 
-color-mapping functions as an average human\'s chromatic response within a 2 degree arc inside the fovea.  Thus obtained dependences 
+<div class="panel-text" >
+  <p class="main"></p><p class = "content">
+ <!--The CIE 1931 color space, a conventional reference for other color spaces, has been developed in 1931 by International Commission on 
+ Illumination  and is still used as a standard for color definition. It is based on data measured for human observers and a 2-degree field 
+ of view (using colorimeter) by David Wright and John Guild. Due to the distribution of color-sensitive photoreceptors in the human eye, 
+ the tristimulus values depend on the observer's field of view. Wright's and Guild's experiments had defined a 
+color-mapping functions as an average human's chromatic response within a 2 degree arc inside the fovea.  Thus obtained dependences 
 (between chromatic response and wavelength) called the CIE 1931 Standard Observer functions or  CIE 1931 2 degree Standard Observer. 
-According to CIE standard, a complete display of colors is three-dimensional. Distinguishable colors are inside conic surface in 
-the three-dimensional metric space X, Y, Z.    </p> -->
+According to CIE standard, distinguishable colors are inside conic surface in 
+the three-dimensional metric space X, Y, Z, CIE color space. Color coordinates when photoluminescence spectra is measured can be obtained as follows
+
+\begin{equation} 
+X(\lambda) = \int I(\lambda) \widetilde{x}(\lambda) d\lambda \\
+Y(\lambda) = \int I(\lambda) \widetilde{y}(\lambda) d\lambda \\
+Z(\lambda) = \int I(\lambda) \widetilde{z}(\lambda) d\lambda 
+
+\end{equation}
+</p>
+<p class = "content">
+The boundary of the coned area of distinguishable colors in the CIE space matches with spectrally pure colors, i.e. 
+coordinates that calculated for spectra with single narrow peak at a particular wavelength. 
+As far as plane cross-sections of the color area defined as X+Y+Z = const contain colors at same brightness, 
+it is possible to omit one of the coordinates from X, Y or Z and consider only two linearly independent coordinates instead. 
+Let's specify new variables and move to the new coordinate system:
+\begin{equation} 
+x = \frac{X}{X+Y+Z} \\
+y = \frac{Y}{X+Y+Z}  \\
+z = \frac{Z}{X+Y+Z}  
+
+\end{equation}
+It is evidently that z = 1 - x - y and can be excluded from further considerations. 
+The new coordinate system {x, y} in the two dimensional space sets an area of colors at the same brightness 
+that called CIE diagram or CIE plot. 
+Deformed arc-shaped curve confining the color field is called spectral locus and reproduces spectrally 
+pure colors of monochromatic emissions with a wavelength from 380 to 780 mm.
+-->
+</p> 
 </div>
 <img alt="CIE plot" id = "CIE" src = "https://alionav.github.io/530.jpg" style="display:none;">
 <script src="https://alionav.github.io/js/CIEcalc.js">
