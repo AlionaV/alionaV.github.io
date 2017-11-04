@@ -155,7 +155,7 @@ printresult('Purity: ' + Purt);
 function Catculate(x0p, y0p) {
 var h, l, x0p, y0p;
 if (y0p > linef(0.333, 0.333, xl(380), yl(380), x0p) & x0p < 0.333 | y0p > linef(0.333, 0.333, xl(780), yl(780), x0p) & x0p >= 0.333) {
-if (x0p < 0.3127) {
+if (x0p < 0.33) {
 l = 380;
 do {
 l = l + 0.1;
