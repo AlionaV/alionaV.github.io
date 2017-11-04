@@ -189,7 +189,7 @@ h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 while (h > 0.001);
 
 }
-Pur = Math.round(dis(x0p, y0p, 0.3127, 0.3291) / dis(0.3127, 0.3291, xl(l), yl(l)) * 100);
+Pur = Math.round(dis(x0p, y0p, 0.333, 0.333) / dis(0.333, 0.333, xl(l), yl(l)) * 100);
 if (Pur > 100 & Pur < 103) { Pur = 100; }
 if (Pur >= 103) {
 Purt = 'undefined';
