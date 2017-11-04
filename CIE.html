@@ -99,7 +99,7 @@
             width: 500px; 
             font-size: large;
         }
-        .button:disabled{cursor:not-allowed;opacity:0.3;}
+        .button:disabled{cursor:not-allowed;opacity:0.5;}
         input[type=text], text{
             width: 100%;
             padding: 8px 20px;
@@ -188,8 +188,7 @@
 <script> 
 
 function inputvaluechecker(){
-   if (isNaN(parseFloat(document.getElementById("myx").value))) {document.getElementById("b1").disabled = true;} else {document.getElementById("b1").disabled = false;}
-
+   if (isNaN(parseFloat(document.getElementById("myx").value))&&isNaN(parseFloat(document.getElementById("myy").value))) {document.getElementById("b1").disabled = true;} else {document.getElementById("b1").disabled = false;}
    if (isNaN(parseFloat(document.getElementById("myy").value))) {document.getElementById("b1").disabled = true;} else {document.getElementById("b1").disabled = false;}
 }
 window.onscroll = function() {scrltotopbt()};
