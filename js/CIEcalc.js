@@ -154,37 +154,37 @@ printresult('Purity: ' + Purt);
 //Purity and Dominant wavelength calculation
 function Catculate(x0p, y0p) {
 var h, l, x0p, y0p;
-if (y0p > linef(0.3127, 0.3291, xl(380), yl(380), x0p) & x0p < 0.3127 | y0p > linef(0.3127, 0.3291, xl(780), yl(780), x0p) & x0p >= 0.3127) {
+if (y0p > linef(0.333, 0.333, xl(380), yl(380), x0p) & x0p < 0.333 | y0p > linef(0.333, 0.333, xl(780), yl(780), x0p) & x0p >= 0.333) {
 if (x0p < 0.3127) {
 l = 380;
 do {
 l = l + 0.1;
-h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
+h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.01);
 l = l - 0.1;
 do {
 l = l + 0.01;
-h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
+h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.001);
 l = l - 0.01;
 do {
 l = l + 0.001;
-h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
+h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.001);
 } else {
 l = 543.0;
 do {
 l = l + 0.1;
-h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
+h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.01);
 l = l - 0.1;
 do {
 l = l + 0.001;
-h = Math.abs(linef(0.3127, 0.3291, x0p, y0p, xl(l)) - yl(l));
+h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.001);
 
