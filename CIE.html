@@ -1,289 +1,581 @@
-
 <!DOCTYPE html>
+
 <html>
+<title>CIE 1931 color spact: dominant wavelength and color purity calculation</title>
 <head>
+  <meta name="keywords" content="CIE 1931,color space,dominant wavelength,color purity">
+  <meta name="desctiption" content="Interactive CIE 1931 plot & dominant wavelength and color purity calculator">
+
    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.16.5/math.min.js"></script> -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript" async="">
+
 </script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 <script type="text/x-mathjax-config">
+
+
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+
 </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <style>
+
         body {font-family: Arial;
+
               margin:0;
+			  background-color:#f2f2f2;
+
         }
+
               
+
         #stage {
+
                 width: 530px;
+
                 height: 530px;
+
                 position: relative;
+
                 }
+
         canvas { position: absolute; 
+
                  cursor: pointer;
+
 				 width: 530px; 
+
 				 height: 530px;
+
         }
+
         #wavelength{ z-index: 3; }
+
         #position{ z-index: 4; }
+
         #layer1 { z-index: 2; }
+
         #myCanvas { z-index: 1; }
+
         .con {width:530px; height:530px;}
+
         .container{margin-left: 10px; margin-top: 10px; padding-top: 20px;}
+
         .button {
+
                 background-color: #595959;
+
                 border: none;
+
                 color: white;
+
                 padding: 10px 10px;
+
                 text-align: center;
+
                 text-decoration: none;
+
                 display: inline-block;
+
                 font-size: 16px;
+
                 margin: 4px 2px;
+
                 cursor: pointer;
+
                 border-radius: 4px;
+
                 }
+
 			.button:hover {
+
                 background-color: black;
+
                 }
+
 #scrltop {
+
   display: none;
+
   position: fixed;
+
   bottom: 20px;
+
   right: 30px;
+
   z-index: 10;
+
   border: none;
+
   outline: none;
+
   background-color: gray;
+
   color: white;
+
   cursor: pointer;
+
   padding: 10px;
+
   padding-top: 5px;
+
   border-radius: 15px;
+
 }
+
+
 
 #scrltop:hover {
+
   background-color: #555;
+
 }
+
         .panel {
+
                 list-style-type: none;
+
                 margin: 0;
+
                 padding-left: 150px;
+
                 padding-top: 20px;
+
                 overflow: hidden;
-                background-color: #f2f2f2;
-                height: 150px;
-                width: 100%;
-                
-                
-        }
-		.panel-text {
-				list-style-type: none;
-                margin: 0;
-                padding-left: 50px;
-				padding-right: 20px;
-                padding-top: 120px;
-				padding-bottom: 50px;
-                overflow: hidden;
+
                 background-color: #f2f2f2;
 
+                height: 150px;
+
                 width: 100%;
-				font-size:120%;
-				text-align:justify;
-		}			
-        div.form {
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-            width: 500px; 
-            font-size: large;
+
+                
+
+                
+
         }
-        .button:disabled{cursor:not-allowed;opacity:0.5;}
-        input[type=text], text{
-            width: 100%;
-            padding: 8px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        div.log {
-            background-color: white;
-            width: 95%;
-            height: 200px;
-            border: 1px solid #ccc;
-            overflow: scroll;
-            margin: 10px;
-            padding: 5px;
-        }
-		.adj {max-width: 500px;}
-		p {
-		margin-top: 1px;
-		margin-bottom: 1px;
-		}
-		p.main{ font-size:50px;}
-		p.submain{font-size: 30px;}
-		.mycol{float:left;width:100%;}
-		.content{max-width:1200px;margin:auto}
-		.spacer{height:20px;
-				margin: 0;
-                padding-left: 150px;
-                padding-top: 20px;
+
+		.panel-text {
+
+				list-style-type: none;
+
+                margin: 0;
+
+                padding-left: 50px;
+
+				padding-right: 20px;
+
+                padding-top: 120px;
+
+				padding-bottom: 50px;
+
                 overflow: hidden;
+
+                background-color: #f2f2f2;
+
+
+
+                width: 100%;
+
+				font-size:120%;
+
+				text-align:justify;
+
+		}			
+
+        div.form {
+
+            border-radius: 5px;
+
+            background-color: #f2f2f2;
+
+            padding: 20px;
+
+            width: 500px; 
+
+            font-size: large;
+
+        }
+
+        .button:disabled{cursor:not-allowed;opacity:0.5;}
+
+        input[type=text], text{
+
+            width: 100%;
+
+            padding: 8px 20px;
+
+            margin: 8px 0;
+
+            display: inline-block;
+
+            border: 1px solid #ccc;
+
+            border-radius: 4px;
+
+            box-sizing: border-box;
+
+        }
+
+        div.log {
+
+            background-color: white;
+
+            width: 95%;
+
+            height: 200px;
+
+            border: 1px solid #ccc;
+
+            overflow: scroll;
+
+            margin: 10px;
+
+            padding: 5px;
+
+        }
+
+		.adj {max-width: 500px;}
+
+		p {
+
+		margin-top: 1px;
+
+		margin-bottom: 1px;
+
+		}
+
+		p.main{ font-size:50px;}
+
+		p.submain{font-size: 30px;}
+
+		.mycol{float:left;width:100%;}
+
+		.content{max-width:1200px;margin:auto}
+
+		.spacer{height:20px;
+
+				margin: 0;
+
+                padding-left: 150px;
+
+                padding-top: 20px;
+
+                overflow: hidden;
+
 				}
+
 		.row:before,.row:after{content:"";display:table;clear:both}	
+
 		
+
 @media screen and (max-width: 500px) {
 
+
+
     .container{margin-left: 5px; margin-right: 5px; margin-top: 10px; padding-top: 20px;}
+
 	 div.form {
+
             border-radius: 5px;
+
             background-color: #f2f2f2;
+
             padding: 20px;
+
             width: 375px; 
+
             font-size: large;
+
     }
+
 	.panel {
+
 			padding-left: 10px;
+
 	}	
+
 	.panel-text {
+
 			padding-left: 10px;
+
 			padding-top: 20px
+
 	}	
+
 	        #stage {
+
                 width: 400px;
+
                 height: 400px;
+
                 position: relative;
+
                 }
+
     canvas { position: absolute; 
+
                  cursor: pointer;
+
 				 width: 400px; 
+
 				 height: 400px;
+
 				 
+
     }
+
 	.adj {width: 400px;}
+
+
 
 	
 
+
+
 }
+
+
 
 @media screen and (max-width: 650px) {
+
 	p.main{font-size:30px;}
+
 	p.submain{font-size: 20px;}
+
 		.panel {
+
 			padding-top: 10px;
+
 			height: 100px;
+
 			padding-left: 20px;		
+
 	}	
+
 	.mobile{display:block;
+
 			width:100%!important}
+
 	.content{max-width: 400px;}		
+
 }
+
 @media screen and (max-width: 360px) {
+
 	.content{max-width: 350px;}		
+
 }
+
      </style>
+
 <script> 
 
+
+
 function inputvaluechecker(){
+
    if (isNaN(parseFloat(document.getElementById("myx").value))||isNaN(parseFloat(document.getElementById("myy").value))) {document.getElementById("b1").disabled = true;} else {document.getElementById("b1").disabled = false;}
+
    
+
 }
+
 window.onscroll = function() {scrltotopbt()};
+
 function scrltotopbt() {
+
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+
         document.getElementById("scrltop").style.display = "block";
+
     } else {
+
         document.getElementById("scrltop").style.display = "none";
+
     }
+
 }
+
 function gototop() {
+
     document.body.scrollTop = 0;
+
     document.documentElement.scrollTop = 0;
+
 }
+
  </script>
+
 	 </head>
 
+
+
 <body onload = "inputvaluechecker()">
+
 <button onclick="gototop()" id="scrltop" title="Back to top"><i class="fa fa-chevron-up" style="font-size:48px;"></i></button>
+
 <div class="panel"><p class="main">Chromaticity diagram:</p><p class="submain">Interactive CIE plot and calculator</p></div>
 
+
+<div style="background-color:white;">
 <div class="row content">
+
 <div class="mycol container" style="width: 550px;">
+
 <div id="stage" style="con">
+
     <canvas id="myCanvas" style="border:1px solid #d3d3d3;">
+
 Your browser does not support the HTML5 canvas tag.</canvas>
+
     <canvas id="layer1" style="background-color: transparent;"></canvas>
+
     <canvas id="position" style="background-color: transparent;"></canvas>
+
     <canvas id="wavelength" style="background-color: transparent;"></canvas>
 
+
+
 </div>
+
     
+
 </div>
+
+
 
 <div class="mycol container adj">
+
      <div class="form"><p style="color: gray; padding: 10px; font-size: 120%; ">Enter CIE coordinates:</p>
+
      <input name="inputx" id="myx" type="text" onchange = "inputvaluechecker()"  placeholder="Enter X or x"><br>
+
      <input name="inputy" id="myy" type="text" onchange = "inputvaluechecker()"  placeholder="Enter Y or y"><br>
+
 	 <input name="inputz" id="mzz" type="text" placeholder="Enter Z (Z = 1 - x - y) or nothing">
+
      <br>
+
      <button type="button" class="button mobile" id="b1" onclick='pResults1()'>Calculate</button>
+
      <button type="button" class="button mobile" id="b2" onclick='clearresults()'>Clear results</button>
+
      <div class="log" id="m1">
-</div>
-</div>
-</div>
+
 </div>
 
+</div>
+
+</div>
+
+</div>
 <div class="spacer"></div>
+</div>
+
+
+
+
+
 
 <div class="panel-text" style="height:200px;"> <!--style="color:#f2f2f2;"-->
+
   <p class="main"></p><p class = "content">
+
 <!--The CIE 1931 color space, a conventional reference for other color spaces, 
+
 has been developed in 1931 by International Commission on Illumination and is
+
  still used as a standard for color definition. It is based on data measured for
+
  human observers for 2-degree field of view (using colorimeter) by David Wright 
+
  and John Guild. Due to the distribution of color-sensitive photoreceptors in the 
+
  human eye, the tristimulus values depend on the observer's field of view. Wright's 
+
  and Guild's experiments had defined a color-mapping functions as an average human's
+
  chromatic response within a 2 deg. arc inside the fovea. Thus obtained dependences 
+
  (between chromatic response and wavelength) called the CIE 1931 Standard Observer 
+
  functions or CIE 1931 2 deg. Standard Observer. According to CIE standard, 
+
  distinguishable colors are inside conic surface in the three-dimensional 
+
  metric space X, Y, Z, CIE color space. Color coordinates when 
+
  photoluminescence spectra is measured can be obtained as follows 
+
 \begin{equation} 
+
 X(\lambda) = \int I(\lambda) \widetilde{x}(\lambda) d\lambda \\
+
 Y(\lambda) = \int I(\lambda) \widetilde{y}(\lambda) d\lambda \\
+
 Z(\lambda) = \int I(\lambda) \widetilde{z}(\lambda) d\lambda 
 
+
+
 \end{equation}
+
 </p>
+
 <p class = "content">
+
 The boundary of the coned area of distinguishable colors in the CIE space matches with spectrally pure colors, i.e. 
+
 coordinates that calculated for spectra with single narrow peak at a particular wavelength. 
+
 As far as plane cross-sections of the color area defined as X+Y+Z = const contain colors at same brightness, 
+
 it is possible to omit one of the coordinates from \(X,\) \(Y\) or \(Z\) and consider only two linearly independent coordinates instead. 
+
 Let's specify new variables and move to the new coordinate system:
+
 \begin{equation} 
+
 x = \frac{X}{X+Y+Z} \\
+
 y = \frac{Y}{X+Y+Z}  \\
+
 z = \frac{Z}{X+Y+Z}  
 
+
+
 \end{equation}
+
 It is evidently that \(z = 1 - x - y\) and can be excluded from further considerations. 
+
 The new coordinate system {\(x\), \(y\)} in the two dimensional space sets an area of colors at the same brightness 
+
 that called CIE diagram or CIE plot. 
+
 Deformed arc-shaped curve confining the color field is called spectral locus and reproduces spectrally 
+
 pure colors of monochromatic emissions with a wavelength from 380 to 780 mm.
 
+
+
 </p> 
+
 </div>-->
+
 <img alt="CIE plot" id = "CIE" src = "https://alionav.github.io/530.jpg" style="display:none;">
+
 <script src="https://alionav.github.io/js/CIEcalc.js">
+
 </script>
+
  
+
 </body>
+
 </html>
