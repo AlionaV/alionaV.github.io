@@ -175,7 +175,7 @@ h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.001);
 } else {
-l = 543.0;
+l = 533.0;
 do {
 l = l + 0.1;
 h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
