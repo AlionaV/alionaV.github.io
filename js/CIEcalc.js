@@ -44,8 +44,8 @@ return (Math.sqrt(Math.log(2) / Math.PI) * (540.2138 / 219.3478) * Math.exp(-Mat
 function yl(l) {
 return ((-7.61e-5) * l + 0.3235) + (Math.sqrt(Math.log(2) / Math.PI) * (7.9741 / 26.281) * Math.exp(-Math.log(2) * Math.pow((l - 569.6327), 2) / Math.pow(26.281, 2))) + (Math.sqrt(Math.log(2) / Math.PI) * (10.4239 / 47.7279) * Math.exp(-Math.log(2) * Math.pow((l - 576.2519), 2) / Math.pow(47.7279, 2))) + (Math.sqrt(Math.log(2) / Math.PI) * (12.7996 / 17.6611) * Math.exp(-Math.log(2) * Math.pow((l - 510.0455), 2) / Math.pow(17.6611, 2))) + (Math.sqrt(Math.log(2) / Math.PI) * (26.5994 / 27.1506) * Math.exp(-Math.log(2) * Math.pow((l - 532.3269), 2) / Math.pow(27.1506, 2))) + (Math.sqrt(Math.log(2) / Math.PI) * ((-136.9371) / 131.2011) * Math.exp(-Math.log(2) * Math.pow((l - 366.8404), 2) / Math.pow(131.2011, 2))) + (Math.sqrt(Math.log(2) / Math.PI) * (33.0533 / 77.9723) * Math.exp(-Math.log(2) * Math.pow((l - 370.8687), 2) / Math.pow(77.9723, 2)));
 }
-function linef(x01, y01, x02, y02, xx) {
-return (xx * (y01 - y02)) / (x01 - x02) + y02 - (x02 * (y01 - y02)) / (x01 - x02);
+function linef(x01, y01, x02, y02, xx) {if (x02 != x01) {
+return (xx * (y01 - y02)) / (x01 - x02) + y02 - (x02 * (y01 - y02)) / (x01 - x02);}
 }
 //Drawing clear CIE plot
 function clearcie() {
@@ -155,7 +155,7 @@ printresult('Purity: ' + Purt);
 function Catculate(x0p, y0p) {
 var h, l, x0p, y0p;
 if (y0p > linef(0.333, 0.333, xl(380), yl(380), x0p) & x0p < 0.333 | y0p > linef(0.333, 0.333, xl(780), yl(780), x0p) & x0p >= 0.333) {
-if (x0p < 0.33) {
+if (x0p < 0.333) {
 l = 380;
 do {
 l = l + 0.1;
@@ -174,7 +174,11 @@ l = l + 0.001;
 h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.001);
-} else {
+}
+if (x0p == 0.333) {
+l = 610.3;
+}
+if (x0p > 0.333) {
 l = 533.0;
 do {
 l = l + 0.1;
