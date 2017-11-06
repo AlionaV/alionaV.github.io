@@ -79,7 +79,6 @@ ctx.fillRect(xj, yy, 1, 1);
 }
 
 
-
 for (l = 380; l < 488; l = l + 0.1) {
 xj = px(xl(l));
 var bound1 = py(yl(l));
