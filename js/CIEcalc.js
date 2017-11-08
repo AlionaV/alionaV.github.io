@@ -625,7 +625,7 @@ T = 10000;
 if (rpy(parseFloat(mousePos.y)) < 0.384 && rpy(parseFloat(mousePos.y)) > 0.299 && rpx(parseFloat(mousePos.x)) < 0.355 && rpx(parseFloat(mousePos.x)) > 0.244) {
 do  {T = T - 50;	
 }
-while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) < 0.01 | T == 1000)
+while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 | T == 1000)
 	
 clearlayer(ctx3);
 
