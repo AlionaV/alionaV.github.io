@@ -645,7 +645,7 @@ ctx3.arc(px(pllocusx(T)), py(pllocusy(pllocusx(T),T)), 3, 0, 2 * Math.PI);
 
 ctx3.stroke();
 
-} else {clearlayer(ctx3);}
+} 
 
 }, false);
 
