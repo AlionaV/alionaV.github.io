@@ -624,12 +624,12 @@ clearlayer(ctx3);
 
 if (rpy(parseFloat(mousePos.y)) < 0.430 && rpy(parseFloat(mousePos.y)) > 0.299 && rpx(parseFloat(mousePos.x)) < 0.585 && rpx(parseFloat(mousePos.x)) > 0.244) {
 
-if (rpx(parseFloat(mousePos.x)) < 0.42) {
+if (rpx(parseFloat(mousePos.x)) < 0.51) {
 	T = 10000;
 do  {T = T - 5;	
 }
 while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)} else {
-	T = 4500;
+	T = 2300;
 	do  {T = T - 2;	
 }
 while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)
