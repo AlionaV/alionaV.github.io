@@ -337,7 +337,7 @@ ctx.stroke();
 }
 }
 
-drawplocus();
+//drawplocus();
 
 //Purity and Dominant wavelength calculation
 
