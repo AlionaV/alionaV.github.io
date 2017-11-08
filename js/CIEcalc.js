@@ -319,6 +319,19 @@ if(T > 1667 && T < 2222) {return -1.1063814*Math.pow(xc,3)-1.34811020*Math.pow(x
 if(T >= 2222 && T < 4000) {return -0.9549476*Math.pow(xc,3)-1.37418593*Math.pow(xc,2)+2.09137015*xc-0.16748867;}
 if(T >= 4000 && T < 25000) {return +3.0817580*Math.pow(xc,3)-5.87338670*Math.pow(xc,2)+3.75112997*xc-0.37001483;}
 }
+
+
+for (T = 1700; T < 24900; T = T + 100) {
+
+ctx.strokeStyle = "black";
+ctx.beginPath();
+var xcc1 = pllocusx(T), xcc2 = pllocusx(T+1);
+ctx.moveTo(px(xcc1), py(pllocusy(xcc1,T)));
+ctx.lineTo(px(xcc2), py(pllocusy(xcc2,T+1)));
+ctx.stroke();
+
+	
+}
  
 
 //Purity and Dominant wavelength calculation
