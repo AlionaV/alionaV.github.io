@@ -308,7 +308,18 @@ printresult('Purity: ' + Purt);
 
 }
 
+function pllocusx(T) { 
+if(T > 1667 && T < 4000) {return - 0.2661239 *(Math.pow(10,9)/Math.pow(T,3))-0.2343580*(Math.pow(10,6)/Math.pow(T,2))+0.8776956*(Math.pow(10,3)/T)+0.179910;}
+ if(T >= 4000 && T < 25000) {return -3.0258469 *(Math.pow(10,9)/Math.pow(T,3))+2.1070379 *(Math.pow(10,6)/Math.pow(T,2))+0.2226347 *(Math.pow(10,3))/T)+0.240390;}
+ }
 
+function pllocusy(xc,T) 
+{
+if(T > 1667 && T < 2222) {return -1.1063814*Math.pow(xc,3)-1.34811020*Math.pow(xc,2)+2.18555832*xc-0.20219683;}
+if(T >= 2222 && T < 4000) {return -0.9549476*Math.pow(xc,3)-1.37418593*Math.pow(xc,2)+2.09137015*xc-0.16748867;}
+if(T >= 4000 && T < 25000) {return +3.0817580*Math.pow(xc,3)-5.87338670*Math.pow(xc,2)+3.75112997*xc-0.37001483;}
+}
+ 
 
 //Purity and Dominant wavelength calculation
 
@@ -398,29 +409,7 @@ while (h > 0.001);
 
 }
 
-//if(Math.round(x0p*1000)/1000 == 0.331) {l = 554.2; }
 
-//if(Math.round(x0p*1000)/1000 == 0.330) {l = 553.9; }
-
-//if(Math.round(x0p*1000)/1000 == 0.332) {l = 554.4; }
-
-//if(Math.round(x0p*1000)/1000 == 0.332) {l = 554.4; }
-
-//if(Math.round(x0p*1000)/1000 == 0.333) {l = 554.5; }
-
-//if(Math.round(x0p*1000)/1000 == 0.334) {l = 554.6; }
-
-//if(Math.round(x0p*1000)/1000 == 0.335) {l = 554.7; }
-
-//if(Math.round(x0p*1000)/1000 == 0.336) {l = 554.85; }
-
-//if(Math.round(x0p*1000)/1000 == 0.337) {l = 554.95; }
-
-//if(Math.round(x0p*1000)/1000 == 0.338) {l = 555.1; }
-
-//if(Math.round(x0p*1000)/1000 == 0.339) {l = 555.25; }
-
-//if(Math.round(x0p*1000)/1000 == 0.340) {l = 555.5; }
 
 if (y0p < linef(0.333, 0.333, 0.4, 0.55, x0p)) {
 
