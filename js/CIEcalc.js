@@ -67,7 +67,9 @@ setdim(cl2);
 setdim(cl3);
 
 	
-
+function rlinef(x01, y01, x02, y02, yy) {
+    return (yy * (x01 - x02)) / (y01 - y02) - (((y02 - (x02 * (y01 - y02)))*(x01 - x02)) / ((x01 - x02)*(y01 - y02)));
+}
 
 
 
@@ -92,7 +94,7 @@ return ((-7.61e-5) * l + 0.3235) + (Math.sqrt(Math.log(2) / Math.PI) * (7.9741 /
 
 function linef(x01, y01, x02, y02, xx) {if (x02 != x01) {
 
-return (xx * (y01 - y02)) / (x01 - x02) + y02 - (x02 * (y01 - y02)) / (x01 - x02);}
+return (x02*y01 - x01*y02 + x01*yy - x02*yy)/(y01 - y02);
 
 }
 
