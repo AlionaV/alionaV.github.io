@@ -321,17 +321,17 @@ if(T >= 4000 && T < 25000) {return +3.0817580*Math.pow(xc,3)-5.87338670*Math.pow
 }
 
 
-for (T = 1700; T < 24900; T = T + 100) {
 
-ctx.strokeStyle = "black";
-ctx.beginPath();
-var xcc1 = pllocusx(T), xcc2 = pllocusx(T+1);
-ctx.moveTo(px(xcc1), py(pllocusy(xcc1,T)));
-ctx.lineTo(px(xcc2), py(pllocusy(xcc2,T+1)));
-ctx.stroke();
 
-	
-}
+//ctx.strokeStyle = "black";
+//ctx.beginPath();
+//var xcc1 = pllocusx(T), xcc2 = pllocusx(T+1);
+//ctx.moveTo(px(xcc1), py(pllocusy(xcc1,T)));
+//ctx.lineTo(px(xcc2), py(pllocusy(xcc2,T+1)));
+//ctx.stroke();
+
+	printresult(pllocusx(4200), "red");
+
  
 
 //Purity and Dominant wavelength calculation
