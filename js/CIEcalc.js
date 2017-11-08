@@ -362,17 +362,17 @@ if (y0p >= linef(0.333, 0.333, 0.1, 0.6, x0p) && y0p >= linef(0.333, 0.333, 0.4,
 
 l = 500;
 
-do {
+//do {
 
-l = l + 0.1;
+//l = l + 0.1;
 
-h = Math.abs(rlinef(0.333, 0.333, x0p, y0p, yl(l)) - xl(l));
+//h = Math.abs(rlinef(0.333, 0.333, x0p, y0p, yl(l)) - xl(l));
 
-}
+//}
 
-while (h > 0.01);
+//while (h > 0.01);
 
-l = l - 0.1;
+//l = l - 0.1;
 
 do {
 
