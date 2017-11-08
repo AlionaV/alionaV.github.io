@@ -622,32 +622,32 @@ clearlayer(ctx3);
 
 }
 
-//if (rpy(parseFloat(mousePos.y)) < 0.430 && rpy(parseFloat(mousePos.y)) > 0.299 && rpx(parseFloat(mousePos.x)) < 0.585 && rpx(parseFloat(mousePos.x)) > 0.244) {
+if (rpy(parseFloat(mousePos.y)) < 0.430 && rpy(parseFloat(mousePos.y)) > 0.299 && rpx(parseFloat(mousePos.x)) < 0.585 && rpx(parseFloat(mousePos.x)) > 0.244) {
 
-//if (rpx(parseFloat(mousePos.x)) < 0.51) {
-//	T = 10000;
-//do  {T = T - 2;	
-//}
-//while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)} else {
-//	T = 2300;
-//	do  {T = T - 2;	
-//}
-//while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)
-//}
+if (rpx(parseFloat(mousePos.x)) < 0.51) {
+	T = 10000;
+do  {T = T - 2;	
+}
+while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)} else {
+	T = 2300;
+	do  {T = T - 2;	
+}
+while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)
+}
 	
-//clearlayer(ctx3);
+clearlayer(ctx3);
 
-//PrintMessage(cl3, Math.round(T) + " K", 380, 80, "red");
+PrintMessage(cl3, Math.round(T) + " K", 380, 80, "red");
 
-//ctx3.beginPath();
+ctx3.beginPath();
 
-//ctx3.arc(px(pllocusx(T)), py(pllocusy(pllocusx(T),T)), 3, 0, 2 * Math.PI);
+ctx3.arc(px(pllocusx(T)), py(pllocusy(pllocusx(T),T)), 3, 0, 2 * Math.PI);
 
-//ctx3.stroke();
+ctx3.stroke();
 
-//} 
+} 
 
-//}, false);
+}, false);
 
 //When CIE plot has been clicked (calculation for current CIE coordinates)
 
