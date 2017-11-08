@@ -308,31 +308,7 @@ printresult('Purity: ' + Purt);
 
 }
 
-function pllocusx(T) { 
-if(T > 1667 && T < 4000) {return - 0.2661239 *(Math.pow(10,9)/Math.pow(T,3))-0.2343580*(Math.pow(10,6)/Math.pow(T,2))+0.8776956*(Math.pow(10,3)/T)+0.179910;}
- if(T >= 4000 && T < 25000) {return -3.0258469 *(Math.pow(10,9)/Math.pow(T,3))+2.1070379 *(Math.pow(10,6)/Math.pow(T,2))+0.2226347 *(Math.pow(10,3))/T)+0.240390;}
- }
 
-//function pllocusy(xc,T) 
-//{
-//if(T > 1667 && T < 2222) {return -1.1063814*Math.pow(xc,3)-1.34811020*Math.pow(xc,2)+2.18555832*xc-0.20219683;}
-//if(T >= 2222 && T < 4000) {return -0.9549476*Math.pow(xc,3)-1.37418593*Math.pow(xc,2)+2.09137015*xc-0.16748867;}
-//if(T >= 4000 && T < 25000) {return +3.0817580*Math.pow(xc,3)-5.87338670*Math.pow(xc,2)+3.75112997*xc-0.37001483;}
-//}
-
-
-
-
-//ctx.strokeStyle = "black";
-//ctx.beginPath();
-//var xcc1 = pllocusx(T), xcc2 = pllocusx(T+1);
-//ctx.moveTo(px(xcc1), py(pllocusy(xcc1,T)));
-//ctx.lineTo(px(xcc2), py(pllocusy(xcc2,T+1)));
-//ctx.stroke();
-
-	printresult(pllocusx(4200), "red");
-
- 
 
 //Purity and Dominant wavelength calculation
 
