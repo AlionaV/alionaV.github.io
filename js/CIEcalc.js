@@ -100,7 +100,7 @@ function rlinef(x01, y01, x02, y02, xx) {if (x02 != x01) {
 
 return (x02 * y01 - x01 * y02 + x01 * yy - x02 * yy)/(y01 - y02);
 
-}
+}}
 
 //Drawing clear CIE plot
 
