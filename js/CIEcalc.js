@@ -33,6 +33,9 @@ setdim(cl1);
 setdim(cl2);
 setdim(cl3);
 	
+function rlinef(x01, y01, x02, y02, yy) {
+    return (yy * (x01 - x02)) / (y01 - y02) - (((y02 - (x02 * (y01 - y02)))*(x01 - x02)) / ((x01 - x02)*(y01 - y02)));
+}
 
 
 
@@ -155,7 +158,7 @@ printresult('Purity: ' + Purt);
 function Catculate(x0p, y0p) {
 var h, l, x0p, y0p;
 if (y0p > linef(0.333, 0.333, xl(380), yl(380), x0p) & x0p < 0.333 | y0p > linef(0.333, 0.333, xl(780), yl(780), x0p) & x0p >= 0.333) {
-if (x0p < 0.330) {
+if (y0p < linef(0.333, 0.333, 0.1, 0.6, x0p)) {
 l = 380;
 do {
 l = l + 0.1;
@@ -175,20 +178,31 @@ h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
 }
 while (h > 0.001);
 }
-if(Math.round(x0p*1000)/1000 == 0.331) {l = 554.2; }
-if(Math.round(x0p*1000)/1000 == 0.330) {l = 553.9; }
-if(Math.round(x0p*1000)/1000 == 0.332) {l = 554.4; }
-if(Math.round(x0p*1000)/1000 == 0.332) {l = 554.4; }
-if(Math.round(x0p*1000)/1000 == 0.333) {l = 554.5; }
-if(Math.round(x0p*1000)/1000 == 0.334) {l = 554.6; }
-if(Math.round(x0p*1000)/1000 == 0.335) {l = 554.7; }
-if(Math.round(x0p*1000)/1000 == 0.336) {l = 554.85; }
-if(Math.round(x0p*1000)/1000 == 0.337) {l = 554.95; }
-if(Math.round(x0p*1000)/1000 == 0.338) {l = 555.1; }
-if(Math.round(x0p*1000)/1000 == 0.339) {l = 555.25; }
-if(Math.round(x0p*1000)/1000 == 0.340) {l = 555.5; }
-if (x0p > 0.34) {
-l = 533.0;
+
+//sds
+if (y0p >= linef(0.333, 0.333, 0.1, 0.6, x0p) && y0p >= linef(0.333, 0.333, 0.4, 0.55, x0p)) {
+l = 500;
+do {
+l = l + 0.1;
+h = Math.abs(rlinef(0.333, 0.333, x0p, y0p, yl(l)) - xl(l));
+}
+while (h > 0.01);
+l = l - 0.1;
+do {
+l = l + 0.01;
+h =  Math.abs(rlinef(0.333, 0.333, x0p, y0p, yl(l)) - xl(l));
+}
+while (h > 0.001);
+l = l - 0.01;
+do {
+l = l + 0.001;
+h =  Math.abs(rlinef(0.333, 0.333, x0p, y0p, yl(l)) - xl(l));
+}
+while (h > 0.001);
+}
+//sds
+
+l = 550.0;
 do {
 l = l + 0.1;
 h = Math.abs(linef(0.333, 0.333, x0p, y0p, xl(l)) - yl(l));
