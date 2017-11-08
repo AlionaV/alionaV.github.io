@@ -321,21 +321,21 @@ if(T >= 2222 && T < 4000) {return -0.9549476*Math.pow(xc,3)-1.37418593*Math.pow(
 if(T >= 4000 && T < 25000) {return +3.0817580*Math.pow(xc,3)-5.87338670*Math.pow(xc,2)+3.75112997*xc-0.37001483;}
 }
 
-function drawplocus() {
-for (i = 1668; i < 24900; i = i + 100) {
+//function drawplocus() {
+//for (i = 1668; i < 24900; i = i + 100) {
 
-ctx.strokeStyle = "black";
+//ctx.strokeStyle = "black";
 
-ctx.beginPath();
+//ctx.beginPath();
 
-ctx.moveTo(px(Math.round(pllocusx(i))), py(Math.round(pllocusy(pllocusx(i),i)*1000)/1000));
+//ctx.moveTo(px(Math.round(pllocusx(i))), py(Math.round(pllocusy(pllocusx(i),i)*1000)/1000));
 
-ctx.lineTo(px(Math.round(pllocusx(i+1))), py(Math.round(pllocusy(pllocusx(i+1),i+1)*1000)/1000));
+//ctx.lineTo(px(Math.round(pllocusx(i+1))), py(Math.round(pllocusy(pllocusx(i+1),i+1)*1000)/1000));
 
-ctx.stroke();
+//ctx.stroke();
 
-}
-}
+//}
+//}
 
 //drawplocus();
 
