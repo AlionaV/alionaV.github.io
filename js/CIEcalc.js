@@ -310,8 +310,6 @@ printresult('Purity: ' + Purt);
 
 
 
-
-
 //Purity and Dominant wavelength calculation
 
 function Catculate(x0p, y0p) {
@@ -400,7 +398,29 @@ while (h > 0.001);
 
 }
 
+//if(Math.round(x0p*1000)/1000 == 0.331) {l = 554.2; }
 
+//if(Math.round(x0p*1000)/1000 == 0.330) {l = 553.9; }
+
+//if(Math.round(x0p*1000)/1000 == 0.332) {l = 554.4; }
+
+//if(Math.round(x0p*1000)/1000 == 0.332) {l = 554.4; }
+
+//if(Math.round(x0p*1000)/1000 == 0.333) {l = 554.5; }
+
+//if(Math.round(x0p*1000)/1000 == 0.334) {l = 554.6; }
+
+//if(Math.round(x0p*1000)/1000 == 0.335) {l = 554.7; }
+
+//if(Math.round(x0p*1000)/1000 == 0.336) {l = 554.85; }
+
+//if(Math.round(x0p*1000)/1000 == 0.337) {l = 554.95; }
+
+//if(Math.round(x0p*1000)/1000 == 0.338) {l = 555.1; }
+
+//if(Math.round(x0p*1000)/1000 == 0.339) {l = 555.25; }
+
+//if(Math.round(x0p*1000)/1000 == 0.340) {l = 555.5; }
 
 if (y0p < linef(0.333, 0.333, 0.4, 0.55, x0p)) {
 
