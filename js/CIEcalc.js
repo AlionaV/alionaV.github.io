@@ -629,7 +629,7 @@ if (rpx(parseFloat(mousePos.x)) < 0.51) {
 do  {T = T - 10;	
 }
 while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)} else {
-	T = 2255;
+	T = 2300;
 	do  {T = T - 2;	
 }
 while (Math.abs(pllocusy(pllocusx(T),T) - rpy(parseFloat(mousePos.y))) > 0.01 & Math.abs(pllocusx(T) - rpx(parseFloat(mousePos.x))) > 0.01  && T > 1000)
