@@ -561,18 +561,20 @@ context.fillText(message, cc1, cc2);
 function getPointerPosition(canvas, evt) {
 
 var rect = canvas.getBoundingClientRect();
-
-	var wid, hth;
-
-	if (window.innerWidth < 500) {wid = 400; hth = 400;} else {wid = 530; hth = 530;}
+var top = rect.top;
+var bottom = rect.bottom;
+var left = rect.left;
+var right = rect.right;
+var width = right - left;
+var height = bottom - top;
 
 return {
 
-x: (evt.clientX - rect.left) * canvas.width / wid,
+x: (evt.clientX - rect.left) * (canvas.width/width),
 
-y: (evt.clientY - rect.top)* canvas.height / hth
+y: (evt.clientY - rect.top) * (canvas.height/height)
 
-};
+}
 
 }
 
