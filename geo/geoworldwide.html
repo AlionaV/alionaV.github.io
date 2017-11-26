@@ -1,11 +1,11 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link href="/css/d3.geomap.css" rel="stylesheet">
-        <script src="/vendor/d3.geomap.dependencies.min.js"></script>
-        <script src="/js/d3.geomap.min.js"></script>
+        <link href="https://alionav.github.io/geo/css/d3.geomap.css" rel="stylesheet">
+        <script src="https://alionav.github.io/geo/vendor/d3.geomap.dependencies.min.js"></script>
+        <script src="https://alionav.github.io/geo/js/d3.geomap.min.js"></script>
         <script>var map = d3.geomap()
-            .geofile('/topojson/world/countries.json');
+            .geofile('https://alionav.github.io/geo/topojson/world/countries.json');
         
         d3.select('#map')
             .call(map.draw, map);</script>
