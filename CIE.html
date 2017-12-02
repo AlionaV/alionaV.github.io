@@ -778,11 +778,11 @@ fileInput.addEventListener('change', function(e) {
         for (i=0; i < data1.length; i++){ary[i] = ary[i]*100/bhyi;}
         if (arx[Math.round(arx.length/2)] < 2) {for (i = 0; i < data1.length; i++) {arx[i]=arx[i]*1000;}
 			document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='color:#e6b800; font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" +
-            ">'mum' scale has converted to 'nm' scale;</p>" ;
+            ">'mum' scale has been converted to 'nm' scale;</p>" ;
 		}
         if (arx[Math.round(arx.length/2)] > 10000) {for (i = 0; i < data1.length; i++) {arx[i] = Math.round(10000000*100/arx[i])/100;}
 			document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='color:#e6b800; font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" +
-            ">'cm-1' scale has converted to 'nm' scale;</p>";
+            ">'cm-1' scale has been converted to 'nm' scale;</p>";
 		}
         if (arx[Math.round(arx.length/2)] > arx[Math.round(arx.length/2)+5]) {for (i = 0; i < arx.length; i++) {dbarx[i] = arx[arx.length - 1 - i]; dbary[i] = ary[arx.length - 1 - i];} for (i = 0; i < arx.length; i++) {arx[i] = dbarx[i]; ary[i] = dbary[i]; }}
         blyi = getMinOfArray(ary);
