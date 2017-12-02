@@ -3,570 +3,1084 @@
 <html>
 
 <head>
-  <meta name="keywords" content="CIE 1931,color space,dominant wavelength,color purity">
-  <meta name="desctiption" content="Interactive CIE 1931 plot and dominant wavelength and color purity calculator">
-<title>CIE 1931 color space: dominant wavelength and color purity calculation</title>
- 
 
 
+
+</script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <style>
 
-        body {font-family: Arial;
+input[type="file"]{
+    display: none;
+}
 
-              margin:0;
-			  background-color:#f2f2f2;
+.inputfile + label {
+     max-width: 700px;
+     font-size: 16px;
+     text-overflow: ellipsis; 
+     white-space: nowrap;
+     cursor: pointer;
+     display: inline-block;
+     overflow: hidden;
+     padding: 10px 20px;
+}
 
-        }
+.inputfile + label svg {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: 2px;
+    margin-right: 4px;
+}
 
-              
 
-        #stage {
+.inputfile-6 + label {
+    color: #595959;
+    height: 38px;
+    border-radius:5px;
+}
 
-                width: 530px;
-				
-				height: 530px;
+.inputfile-6 + label {
+    border: 1px solid #595959;
+    background-color:white;
+    padding: 0;
+}
 
-                position: relative;
+.inputfile-6 + label:hover {
+    border-color: black;
+}
 
-                }
+.inputfile-6 + label span,
+.inputfile-6 + label p {
+    padding: 10px 20px;
+}
 
-        canvas { position: absolute; 
+.inputfile-6 + label span {
+    width: 215px;
+    height: 20px;
+    min-height: 2em;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+}
 
-                 cursor: pointer;
+.inputfile-6 + label p {
+    height: 30px;
+    color: white;
+    background-color: #595959;
+    /*background-color: #d3394c;*/
+    display: inline-block;
+}
 
-				 width: 530px; 
+.inputfile-6 + label:hover p {
+    background-color: black;
+}
 
-				 height: 530px;
+#stage2 {
+    width: 600px;
+    height: 400px;
+    position: relative;
+}
 
-        }
+ canvas.my {
+    position: absolute; 
+    cursor: pointer;
+    width: 600px; 
+    height: 400px;
+}
 
-        #wavelength{ z-index: 3; }
+#myModal { z-index: 7; }
+#baseline { z-index: 4; }
+#cpointer { z-index: 3; }
+#bounds { z-index: 2; }
+#my { z-index: 1; }
 
-        #position{ z-index: 4; }
+body {
+    font-family: Arial;
+    margin:0;
+    background-color:#f2f2f2;
+}
 
-        #layer1 { z-index: 2; }
+#stage {
+    width: 480px;
+    height: 480px;
+    position: relative;
+}
 
-        #myCanvas { z-index: 1; }
+canvas {
+    position: absolute; 
+    cursor: pointer;
+    width: 480px;
+    height: 480px;
+}
 
-        .con {width:530px; height:530px;}
+#wavelength{ z-index: 3; }
+#position{ z-index: 4; }
+#layer1 { z-index: 2; }
+#myCanvas { z-index: 1; }
 
-        .container{margin-left: 10px; margin-top: 10px; padding-top: 20px;}
+.con {width:480px; height:480px;}
 
-        .button {
+.container{margin-left: 10px; margin-top: 10px; padding-top: 20px;}
 
-                background-color: #595959;
+.button {
+    background-color: #595959;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
 
-                border: none;
+.button:hover {
+    background-color: black;
+}
 
-                color: white;
+.btn-ico {
+    width:50px;
+    height:50px;
+    color: #595959;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 38px;
+    border: none;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
 
-                padding: 10px 10px;
-
-                text-align: center;
-
-                text-decoration: none;
-
-                display: inline-block;
-
-                font-size: 16px;
-
-                margin: 4px 2px;
-
-                cursor: pointer;
-
-                border-radius: 4px;
-
-                }
-
-			.button:hover {
-
-                background-color: black;
-
-                }
+.btn-ico:hover {
+    font-size: 40px;
+}
 
 #scrltop {
-
-  display: none;
-
-  position: fixed;
-
-  bottom: 20px;
-
-  right: 30px;
-
-  z-index: 10;
-
-  border: none;
-
-  outline: none;
-
-  background-color: gray;
-
-  color: white;
-
-  cursor: pointer;
-
-  padding: 10px;
-
-  padding-top: 5px;
-
-  border-radius: 15px;
-
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 10;
+    border: none;
+    outline: none;
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    padding-top: 5px;
+    border-radius: 50%;
+    width:55px;
+    height:55px;
 }
-
-
 
 #scrltop:hover {
-
-  background-color: #555;
-
+    background-color: #555;
 }
 
-        .panel {
-
-                list-style-type: none;
-
-                margin: 0;
-
-                padding-left: 150px;
-
-                padding-top: 20px;
-
-                overflow: hidden;
-
-                background-color: #f2f2f2;
-
-                height: 150px;
-
-                width: 100%;
-
-                
-
-                
-
-        }
-
-		.panel-text {
-
-				list-style-type: none;
-
-                margin: 0;
-
-                padding-left: 50px;
-
-				padding-right: 20px;
-
-                padding-top: 120px;
-
-				padding-bottom: 50px;
-
-                overflow: hidden;
-
-                background-color: #f2f2f2;
-
-
-
-                width: 100%;
-
-				font-size:120%;
-
-				text-align:justify;
-
-		}			
-
-        div.form {
-
-            border-radius: 5px;
-
-            background-color: #f2f2f2;
-
-            padding: 20px;
-
-            width: 500px; 
-
-            font-size: large;
-
-        }
-
-        .button:disabled{cursor:not-allowed;opacity:0.5;}
-
-        input[type=text], text{
-
-            width: 100%;
-
-            padding: 8px 20px;
-
-            margin: 8px 0;
-
-            display: inline-block;
-
-            border: 1px solid #ccc;
-
-            border-radius: 4px;
-
-            box-sizing: border-box;
-
-        }
-
-        div.log {
-
-            background-color: white;
-
-            width: 95%;
-
-            height: 200px;
-
-            border: 1px solid #ccc;
-
-            overflow: scroll;
-
-            margin: 10px;
-
-            padding: 5px;
-
-        }
-
-		.adj {max-width: 500px;}
-
-		p {
-
-		margin-top: 1px;
-
-		margin-bottom: 1px;
-
-		}
-
-		p.main{ font-size:50px;}
-
-		p.submain{font-size: 30px;}
-
-		.mycol{float:left;width:100%;}
-
-		.content{max-width:1200px;margin:auto}
-
-		.spacer{height:20px;
-
-				margin: 0;
-
-                padding-left: 150px;
-
-                padding-top: 20px;
-
-                overflow: hidden;
-
-				}
-
-		.row:before,.row:after{content:"";display:table;clear:both}	
-
-		
-
-@media screen and (max-width: 500px) {
-
-
-
-    .container{margin-left: 5px; margin-right: 5px; margin-top: 10px; padding-top: 20px;}
-
-	 div.form {
-
-            border-radius: 5px;
-
-            background-color: #f2f2f2;
-
-            padding: 20px;
-
-            width: 85vw; 
-
-            font-size: large;
-
+.panel {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 150px;
+    padding-top: 20px;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    height: 150px;
+    width: 100%;
+}
+
+.panel-text {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 50px;
+    padding-right: 20px;
+    padding-top: 120px;
+    padding-bottom: 50px;
+    overflow: hidden;
+    background-color: #f2f2f2;
+    width: 100%;
+    font-size:120%;
+    text-align:justify;
+}
+
+
+div.form {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    max-width: 470px; 
+    font-size: large;
+}
+
+.button:disabled{cursor:not-allowed;opacity:0.5;}
+input[type=text], text{
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+div.log {
+    background-color: white;
+    width: 95%;
+    height: 160px;
+    border: 1px solid #ccc;
+    overflow: scroll;
+    margin: 5px;
+    padding: 5px;
+	color: #595959;
+}
+
+.adj {
+    max-width: 490px;
+}
+
+p {
+    margin-top: 0px;
+}
+
+p.main{ font-size:50px; margin:10px;}
+
+p.submain{font-size: 30px;margin:1px;}
+
+.mycol{float:left;width:100%;}
+
+.content{max-width:1200px;margin:auto}
+
+.spacer{
+    height:20px;
+    margin: 0;
+    padding-left: 150px;
+    padding-top: 20px;
+    overflow: hidden;
+}
+
+.row:before,.row:after{
+    content:"";
+    display:table;
+    clear:both
+}
+
+
+@media screen and (max-width: 490px) {
+    .container{
+        margin-left: 5px; 
+        margin-right: 5px; 
+        margin-top: 10px; 
+        padding-top: 20px;
     }
 
-	.panel {
-
-			padding-left: 10px;
-
-	}	
-
-	.panel-text {
-
-			padding-left: 10px;
-
-			padding-top: 20px
-
-	}	
-
-	.adj {width: 99vw;}
+    .panel {
+        padding-left: 10px;
+    }
 
 
+    .panel-text {
+        padding-left: 10px;
+        padding-top: 20px
+    }
 
-	
+    .adj {width: 99vw;}
+    div.form {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+        max-width: 95vw; 
+        font-size: large;
+    }
 
+    p.main{font-size:30px;}
 
+    p.submain{font-size: 20px;}
+
+    .panel {
+        padding-top: 10px;
+        height: 100px;
+        padding-left: 10px;
+    }
+
+    .mobile {
+        display:block;
+        width:100%!important
+    }
+
+    .content {
+            max-width: 99vw;
+        }
+
+    #stage {
+        width: 100vw;
+        height: 100vw;
+        position: relative;
+    }
+
+    canvas { 
+        position: absolute; 
+        cursor: pointer;
+        width: 95vw;
+        height: 95vw; 
+    }
 
 }
 
-
-
-@media screen and (max-width: 650px) {
-
-	p.main{font-size:30px;}
-
-	p.submain{font-size: 20px;}
-
-		.panel {
-
-			padding-top: 10px;
-
-			height: 100px;
-
-			padding-left: 10px;		
-
-	}	
-
-	.mobile{display:block;
-
-			width:100%!important}
-
-	.content{max-width: 99vw;}		
-
-		#stage {
-
-                 width: 100vw;
-				 
-				 height: 100vw;
-
-
-                 position: relative;
-
-            }
-
-    canvas { position: absolute; 
-
-                 cursor: pointer;
-
-				 width: 95vw;
-				 
-				 height: 95vw; 
-		 
-			}
+@media screen and (max-width: 800px) {
+    .hide-on-small{
+        display:none;
+    }
 }
+
+
+@media screen and (max-width: 490px) {
+
+  
+}
+
+
 
 @media screen and (max-width: 360px) {
-
-	.content{max-width: 350px;}		
-
+    .content{max-width: 350px;}
 }
 
-     </style>
+
+
+
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    padding-top: 200px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    position: relative;
+    background-color: #f2f2f2;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 0px;
+    border: 1px solid #888;
+    width: 800px;
+    font-size: 18px;
+    text-align:justify;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.close {
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px; background-color: #f2f2f2;
+}
+
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #f2f2f2;
+}
+
+</style>
 
 <script> 
 
-
-
 function inputvaluechecker(){
-
    if (isNaN(parseFloat(document.getElementById("myx").value))||isNaN(parseFloat(document.getElementById("myy").value))) {document.getElementById("b1").disabled = true;} else {document.getElementById("b1").disabled = false;}
-
-   
-
 }
 
 window.onscroll = function() {scrltotopbt()};
 
 function scrltotopbt() {
-
     if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-
         document.getElementById("scrltop").style.display = "block";
-
     } else {
-
         document.getElementById("scrltop").style.display = "none";
-
     }
-
 }
 
 function gototop() {
-
     document.body.scrollTop = 0;
-
     document.documentElement.scrollTop = 0;
-
 }
 
  </script>
 
-	 </head>
+</head>
 
+<body onload="inputvaluechecker()">
+    <div class="panel"><p class="main">Chromaticity diagram:</p><p class="submain">Interactive CIE plot and calculator</p></div>
+    <button onclick="gototop()" id="scrltop" title="Back to top"><i class="fa fa-chevron-up" style="font-size:35px;"></i></button>
+    <div style="background-color:white;">
+        <div class="row content">
+            <div class="mycol container " style="max-width:490px;">
+                <div id="stage" class="con" >
+                    <canvas id="myCanvas" style="border:1px solid #d3d3d3;">
+                        Your browser does not support the HTML5 canvas tag.
+                    </canvas>
+                    <canvas id="layer1" style="background-color: transparent;">
+                    </canvas>
+                    <canvas id="position" style="background-color: transparent;">
+                    </canvas>
+                    <canvas id="wavelength" style="background-color: transparent;">
+                    </canvas>
+                </div>
+            </div>
 
+            <div class="mycol container adj">
+                <div class="form"><p style="color: gray; padding-left: 10px;padding-top: 15px; padding-bottom: 3px; font-size: 110%; ">Enter CIE coordinates:</p>
+                    <input name="inputx" id="myx" type="text" onchange = "inputvaluechecker()"  placeholder="Enter X or x"><br>
+                    <input name="inputy" id="myy" type="text" onchange = "inputvaluechecker()"  placeholder="Enter Y or y"><br>
+                    <input name="inputz" id="mzz" type="text" placeholder="Enter Z (Z = 1 - x - y) or nothing">
+                    <br>
+                    <button type="button" class="button mobile" id="b1" onclick='pResults1()'>Calculate</button>
+                    <button type="button" class="button mobile" id="b2" onclick='clearresults()'>Clear results</button>   
+                    <div class="log" id="m1">   
+                    </div>   
+                </div>    
+            </div>
+        </div>
+        <div class="spacer"></div>
+    </div>
 
-<body onload = "inputvaluechecker()">
-
-<button onclick="gototop()" id="scrltop" title="Back to top"><i class="fa fa-chevron-up" style="font-size:48px;"></i></button>
-
-<div class="panel"><p class="main">Chromaticity diagram:</p><p class="submain">Interactive CIE plot and calculator</p></div>
-
-
-<div style="background-color:white;">
-<div class="row content">
-
-<div class="mycol container" style="max-width: 550px;">
-
-<div id="stage" style="con">
-
-    <canvas id="myCanvas" style="border:1px solid #d3d3d3;">
-
-Your browser does not support the HTML5 canvas tag.</canvas>
-
-    <canvas id="layer1" style="background-color: transparent;"></canvas>
-
-    <canvas id="position" style="background-color: transparent;"></canvas>
-
-    <canvas id="wavelength" style="background-color: transparent;"></canvas>
-
-
-
+    <div class="panel-text" style="height:20px;padding:30px;"></div>
+    <div class="row content hide-on-small" style="max-width:1600px;">
+        <div class="mycol container"><div>
+        <div class="mycol container" style="width:680px;">
+                <div id="stage2" style="left:50px;">
+                    <canvas class="my" id="spectrum" width="600" height="400" style="border:1px solid #d3d3d3; background-color:white;"></canvas>
+                    <canvas id="baseline" class="my" width="600" height="400" style="border:1px solid #d3d3d3; background-color:transparent;"></canvas>
+                    <canvas id="bounds" class="my" width="600" height="400" style="border:1px solid #d3d3d3; background-color:transparent;"></canvas>
+                    <canvas id="cpointer" class="my" width="600" height="400" style="border:1px solid #d3d3d3; background-color:transparent;"></canvas>  
+                </div>
+            </div>    
+            <div class="mycol container" style="width:600px;">
+        <input type="file" id="fileInput">                
+        <div>
+            <input type="file" name="file-7[]" id="fileInput" class="inputfile inputfile-6" data-multiple-caption="{count} files selected" multiple />
+            <label for="fileInput"><span id="file_name"></span> <p><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> Choose a file&hellip;</p></label>
+        </div>
+        <button id="baselineb" class="button" onclick="substractBaseline()"  style="width:245px;">Substract baseline</button>
+        <button id="rescale" class="button"  style="width:182px;" onclick="calcXYZ()">Calculate</button>
+        <p id="sd"></p>
+        <div class="log" id="m2" style="width:420px;height:320px;">
+        </div>
+        <button id="zoom" class="btn-ico" onclick="swichzoom()" title="Zoom"><i class="fa fa-search"></i></button>
+        <button id="rescale" class="btn-ico" onclick="rescalespectrum()" title="Rescale"><i class="fa fa-arrows"></i></button>
+        <button id="rescale" class="btn-ico" onclick="removelog()" title="Clear log"><i class="fa fa-refresh"></i></button>
+        <button id="myBtn"  class="btn-ico" title="Settings"><i class="fa fa-gear"></i></button>
+    </div>
 </div>
 
-    
+<p class="main"></p><p class = "content"></p>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Settings</h2>
+            </div>
+            <div class="modal-body">
+                <p>Please, upload correct data files, with .csv or .txt extentions. </p>
+                <br>
+                <p style="max-width:650px;">Parser handles with simple two-columns text tables, where the first column is a wavelength (or a wavenumber), and the second one is intensity. The comma ", " is applied as default string delimiter.</p>
+                <br>
+                <p>For special data file structure specify delimiter in the form below:</p>
+                <input name="delimiterset" id="delimiter" type="text" style="max-width:400px;" placeholder="Enter delimiter ... "></input><br>
+                <button id="btdelimiter" class="button" onclick="delimiterspecify()">Apply</button>
+            </div>
+            <div class="modal-footer">
+                <h3> </h3>
+            </div>
+        </div>
+    </div>
+
+    <p class="container" style="height:200px;"></p><p class = "content"></p>
+
+    <img alt="CIE plot" id = "CIE" src = "https://alionav.github.io/530.jpg" style="display:none;">
 
-</div>
-
-
-
-<div class="mycol container adj">
-
-     <div class="form"><p style="color: gray; padding: 10px; font-size: 120%; ">Enter CIE coordinates:</p>
-
-     <input name="inputx" id="myx" type="text" onchange = "inputvaluechecker()"  placeholder="Enter X or x"><br>
-
-     <input name="inputy" id="myy" type="text" onchange = "inputvaluechecker()"  placeholder="Enter Y or y"><br>
-
-	 <input name="inputz" id="mzz" type="text" placeholder="Enter Z (Z = 1 - x - y) or nothing">
-
-     <br>
-
-     <button type="button" class="button mobile" id="b1" onclick='pResults1()'>Calculate</button>
-
-     <button type="button" class="button mobile" id="b2" onclick='clearresults()'>Clear results</button>
-
-     <div class="log" id="m1">
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="spacer"></div>
-</div>
-
-
-
-
-
-
-<div class="panel-text" style="height:200px;"> <!--style="color:#f2f2f2;"-->
-
-  <p class="main"></p><p class = "content">
-
-<!--The CIE 1931 color space, a conventional reference for other color spaces, 
-
-has been developed in 1931 by International Commission on Illumination and is
-
- still used as a standard for color definition. It is based on data measured for
-
- human observers for 2-degree field of view (using colorimeter) by David Wright 
-
- and John Guild. Due to the distribution of color-sensitive photoreceptors in the 
-
- human eye, the tristimulus values depend on the observer's field of view. Wright's 
-
- and Guild's experiments had defined a color-mapping functions as an average human's
-
- chromatic response within a 2 deg. arc inside the fovea. Thus obtained dependences 
-
- (between chromatic response and wavelength) called the CIE 1931 Standard Observer 
-
- functions or CIE 1931 2 deg. Standard Observer. According to CIE standard, 
-
- distinguishable colors are inside conic surface in the three-dimensional 
-
- metric space X, Y, Z, CIE color space. Color coordinates when 
-
- photoluminescence spectra is measured can be obtained as follows 
-
-\begin{equation} 
-
-X(\lambda) = \int I(\lambda) \widetilde{x}(\lambda) d\lambda \\
-
-Y(\lambda) = \int I(\lambda) \widetilde{y}(\lambda) d\lambda \\
-
-Z(\lambda) = \int I(\lambda) \widetilde{z}(\lambda) d\lambda 
-
-
-
-\end{equation}
-
-</p>
-
-<p class = "content">
-
-The boundary of the coned area of distinguishable colors in the CIE space matches with spectrally pure colors, i.e. 
-
-coordinates that calculated for spectra with single narrow peak at a particular wavelength. 
-
-As far as plane cross-sections of the color area defined as X+Y+Z = const contain colors at same brightness, 
-
-it is possible to omit one of the coordinates from \(X,\) \(Y\) or \(Z\) and consider only two linearly independent coordinates instead. 
-
-Let's specify new variables and move to the new coordinate system:
-
-\begin{equation} 
-
-x = \frac{X}{X+Y+Z} \\
-
-y = \frac{Y}{X+Y+Z}  \\
-
-z = \frac{Z}{X+Y+Z}  
-
-
-
-\end{equation}
-
-It is evidently that \(z = 1 - x - y\) and can be excluded from further considerations. 
-
-The new coordinate system {\(x\), \(y\)} in the two dimensional space sets an area of colors at the same brightness 
-
-that called CIE diagram or CIE plot. 
-
-Deformed arc-shaped curve confining the color field is called spectral locus and reproduces spectrally 
-
-pure colors of monochromatic emissions with a wavelength from 380 to 780 mm.
-
-
-
-</p> 
-
-</div>-->
-
-<img alt="CIE plot" id = "CIE" src = "https://alionav.github.io/530.jpg" style="display:none;">
 
 <script src="https://alionav.github.io/js/CIEcalc.js">
-
 </script>
 
+<script>
+
+var modal = document.getElementById('myModal');
+
+
+var btn = document.getElementById("myBtn");
+
+
+var span = document.getElementsByClassName("close")[0];
+
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+<script>
+var cs = document.getElementById("spectrum");
+var ctxs = cs.getContext("2d");
+var cbs = document.getElementById("baseline");
+var ctxbs = cbs.getContext("2d");
+var cbounds = document.getElementById("bounds");
+var ctxbounds = cbounds.getContext("2d");
+var cpointer = document.getElementById("cpointer");
+var ctxpointer = cpointer.getContext("2d"); 
+var bhxw, blxw, amin, amax;
+var bhyi, blyi, bmin, bmax;
+var v = 0, u = 0;
+var ixmax, ixmin;
+var arx=[], ary=[], dbarx=[], dbary=[];
+var mouse = {x: 0, y: 0};
+var fileInput = document.getElementById('fileInput');
+var filename = "";
+var x0t, y0t;
+var delimiter = ","; 
+
+// Substract basrline
+function substractBaseline() { 
+    if (v == 0) {
+        blyi = 0;
+        bhyi = getMaxOfArray(ary);
+        bhyi = bhyi + 0.2*(bhyi-blyi)/2;
+        if (findv(arx,780)==-1) {bhxw = getMaxOfArray(arx);ixmax = arx.length-1;} else {bhxw = 780;ixmax = findv(arx,780);}
+        if (findv(arx,380)==-1) {blxw = getMinOfArray(arx);ixmin = 0;} else {blxw = 380;ixmin = findv(arx,380);}
+        for (i = ixmin; i < ixmax ; i = i + 1) {
+            ary[i] = ary[i] - linef(amin,bmin,amax,bmax,arx[i]);
+        }
+        clearlayer1(ctxs);
+        clearlayer1(ctxbs);
+        redraw(cs, ctxs, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin);
+        v = 1;
+        document.getElementById("baselineb").disabled = true;
+    }
+}
+
+// Redraw spactra and axes
+
+function redraw(canv, cont, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin) {
+    cont.clearRect(0,0,700,500);
+    ixmax = findv(arx,bhxw);
+    ixmin = findv(arx,blxw);
+    cont.beginPath();
+    cont.moveTo(pxw(blxw), pyi(blyi));
+    cont.lineTo(pxw(blxw), pyi(bhyi));
+    cont.moveTo(pxw(blxw), pyi(blyi));
+    cont.lineTo(pxw(bhxw), pyi(blyi));
+    cont.strokeStyle = "black";
+    for (i = 0; i < 10; i++) {
+        cont.moveTo(pxw((i / 10)*(bhxw-blxw)+blxw), pyi(blyi) + 5);
+        cont.lineTo(pxw((i / 10)*(bhxw-blxw)+blxw), pyi(blyi));
+        cont.font = "15px Arial";
+        cont.fillText(Math.round(((i / 10)*(bhyi-blyi)+blyi)*10)/10, pxw(blxw) - 35, pyi((i / 10)*(bhyi-blyi)+blyi));
+        cont.moveTo(pxw(blxw) - 5, pyi((i / 10)*(bhyi-blyi)+blyi));
+        cont.lineTo(pxw(blxw), pyi((i / 10)*(bhyi-blyi)+blyi));
+        cont.fillText(Math.round(((i / 10)*(bhxw-blxw)+blxw)*10)/10, pxw((i / 10)*(bhxw-blxw)+blxw) - 15, pyi(blyi) + 25);
+    }
+    cont.stroke();
+    for (i = ixmin; i < ixmax ; i = i + 1) {
+        cont.strokeStyle = "#006666";
+        cont.beginPath();
+        cont.moveTo(pxw(arx[i]), pyi(ary[i]));
+        cont.lineTo(pxw(arx[i+1]), pyi(ary[i+1]));
+        cont.stroke();
+    }
+}
+
+document.getElementById('m2').innerHTML = "<p style='color:#4d4d4d; font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" +
+"To calculate X,Y,Z (or x, y) CIE coordinates upload photoluminescence spectrum data file (.csv or .txt extensions)." + 
+" Note that comma ',' is default string delimiter. Data should be in 'nm', 'mum' or 'cm-1' scale and match with the visible region (400 - 700 nm).</p>";
+
+function drawpoint() {
+    ctxpointer.clearRect(0,0,700,500);
+    var ax1 = mouse.x;
+    var ay1 = pyi(ary[findv(arx,rpxw(ax1))]);
+    if (Math.abs(mouse.y - ay1) < 100){
+        ctxpointer.strokeStyle = "#006666";
+        ctxpointer.beginPath();
+        ctxpointer.arc(ax1, ay1, 3, 0, 2 * Math.PI);
+        ctxpointer.arc(ax1, ay1, 1, 0, 2 * Math.PI);
+        ctxpointer.stroke();
+        ctxpointer.font = "18px Arial";
+        ctxpointer.fillStyle = "red";
+        ctxpointer.fillText(Math.round(rpxw(ax1)*10)/10 + " nm", 600, 50);
+    }
+}
+
+function xResp(lam) {
+    var lam;
+    return (Math.sqrt(Math.log(2)/Math.PI) * (13.5756/21.3663) * Math.exp(-Math.log(2) * Math.pow((lam-446.3132),2)/ Math.pow(21.3663,2))) 
+    + (Math.sqrt(Math.log(2)/Math.PI) * (9.2909/30.4049) * Math.exp(-Math.log(2) * Math.pow( (lam-637.8951),2 )/ Math.pow (30.4049,2))) +
+    (Math.sqrt(Math.log(2)/Math.PI) * (1.5987/11.4743) * Math.exp(-Math.log(2) * Math.pow ((lam-531.0901),2) / Math.pow (11.4743,2))) +
+    (Math.sqrt(Math.log(2)/Math.PI) * (54.4829/28.1341) * Math.exp(-Math.log(2) * Math.pow( (lam-603.9827),2) / Math.pow( 28.1341,2))) +
+    (Math.sqrt(Math.log(2)/Math.PI) * (5.5745/15.8913) * Math.exp(-Math.log(2) * Math.pow ((lam-548.3749),2) / Math.pow (15.8913,2))) +
+    (Math.sqrt(Math.log(2)/Math.PI) * (17.5508/21.576) * Math.exp(-Math.log(2) * Math.pow ((lam-571.7349),2) / Math.pow (21.576,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (1.8471/10.1613) * Math.exp(-Math.log(2) * Math.pow ((lam-432.0758),2) / Math.pow (10.1613,2))) +
+    (Math.sqrt(Math.log(2)/Math.PI) * (2.4169/15.573) * Math.exp(-Math.log(2) * Math.pow ((lam-466.0407),2) / Math.pow (15.573,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (0.1773/27.2046) * Math.exp(-Math.log(2) * Math.pow ((lam-699.0044),2) / Math.pow (27.2046,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (0.3326/11.0766) * Math.exp(-Math.log(2) * Math.pow ((lam-646.9162),2) / Math.pow (11.0766,2)));
+}
+
+
+
+function yResp(lam) {
+    var lam;
+    return (Math.sqrt(Math.log(2)/Math.PI) * (63.5021/42.1704) * Math.exp(-Math.log(2) * Math.pow ((lam-579.3088),2) / Math.pow (42.1704,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (1.4117/12.2973) * Math.exp(-Math.log(2) * Math.pow ((lam-520.4754),2) / Math.pow (12.2973,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (9.1362/37.0161) * Math.exp(-Math.log(2) * Math.pow ((lam-498.0052),2) / Math.pow (37.0161,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (29.1105/27.1831) * Math.exp(-Math.log(2) * Math.pow ((lam-536.9889),2) / Math.pow( 27.1831,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (2.9246/18.0776) * Math.exp(-Math.log(2) * Math.pow ((lam-571.6626),2) / Math.pow (18.0776,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (0.7924/54.1274) * Math.exp(-Math.log(2) * Math.pow ((lam-622.0328),2) / Math.pow( 54.1274,2)));
+}
+
+function zResp(lam) {
+    var lam;
+    return (Math.sqrt(Math.log(2)/Math.PI) * (19.4376/12.0138) * Math.exp(-Math.log(2) * Math.pow ((lam-432.6861),2 )/ Math.pow (12.0138,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (46.9138/19.1522) * Math.exp(-Math.log(2) * Math.pow ((lam-455.0077),2) / Math.pow (19.1522,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (40.3846/34.8675) * Math.exp(-Math.log(2) * Math.pow ((lam-462.6012),2) / Math.pow (34.8675,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * ((-1.6819e16)/(-4.1894e12)) * Math.exp(-Math.log(2) * Math.pow ((lam-2.1322e13),2 )/ Math.pow ((-4.1894e12),2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (0.1/25.6912) * Math.exp(-Math.log(2) * Math.pow ((lam-563.5329),2) / Math.pow (25.6912,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * (0.218/3.6482) * Math.exp(-Math.log(2) * Math.pow ((lam-464.8352),2) / Math.pow (3.6482,2))) + 
+    (Math.sqrt(Math.log(2)/Math.PI) * ((-0.1347)/7.581) * Math.exp(-Math.log(2) * Math.pow( (lam-387.6341),2) / Math.pow( 7.581,2)));
+}
+
+// linear function
+function linef(x01, y01, x02, y02, xx) {
+    return (xx * (y02 - y01)) / (x02 - x01) + y02 - (x02 * (y02 - y01)) / (x02 - x01);
+}
+
+
+//Drawing baseline
+function drawbaseline(canv, cont, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin, amin, bmin, amax, bmax){
+    cont.strokeStyle = "gray";
+    cont.beginPath();
+    cont.moveTo(Math.round(pxw(arx[ixmin])*10)/10, Math.round(Math.round(pyi(linef(amin,bmin,amax,bmax,Math.round(arx[ixmin]*10)/10))*1000)/1000));
+    cont.lineTo(Math.round(pxw(arx[ixmax])*10)/10, Math.round(Math.round(pyi(linef(amin,bmin,amax,bmax,Math.round(arx[ixmax]*10)/10))*1000)/1000));
+    cont.stroke();
+    cont.strokeStyle = "black";
+    cont.beginPath();
+    cont.arc(pxw(amin), pyi(bmin), 5, 0, 2 * Math.PI);
+    cont.stroke();
+    cont.beginPath();
+    cont.arc(pxw(amax), pyi(bmax), 5, 0, 2 * Math.PI);
+    cont.stroke();
+}
+
+function swichzoom() {
+    if (u == 1) { u = 0;
+        document.getElementById("zoom").setAttribute('style','color: #595959;')
+        document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' >> Zoom off;</p>";
+    } else {
+        u = 1;
+        document.getElementById("zoom").setAttribute('style','color: red;')
+        document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' >> Zoom on;</p>";
+    }
+}
+
+
+function rescalespectrum() {
+    blyi = 0;
+    bhyi = getMaxOfArray(ary);
+    bhyi = bhyi + 0.2*(bhyi-blyi)/2;
+    if (findv(arx,780)==-1) {bhxw = getMaxOfArray(arx);ixmax = arx.length-1;} else {bhxw = 780;ixmax = findv(arx,780);}
+    if (findv(arx,380)==-1) {blxw = getMinOfArray(arx);ixmin = 0;} else {blxw = 380;ixmin = findv(arx,380);}
+    redraw(cs, ctxs, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin);
+    ctxbs.clearRect(0,0,700,500);
+}
+
+//Loading local file
+fileInput.addEventListener('change', function(e) {
+    arx=[]; ary=[];
+    var file = fileInput.files[0];	var textType = /text.*/;
+	filename = file.name;
+    document.getElementById("file_name").innerHTML = filename;
+	if (filename.match(/\.txt$/gi)==".txt"|filename.match(/\.csv$/gi)==".csv") {
+    
+    var reader = new FileReader();
+    document.getElementById("baselineb").disabled = false;
+    var counter = 0;
+
+    reader.onload = function(e) {
+        var data1 = CSVToArray(reader.result,delimiter);
+        var ll=data1.length-1;
+        if ( isNaN(parseFloat(data1[ll][0]))){
+            while ( isNaN(parseFloat(data1[ll][0]))) {data1.splice(ll,ll); ll=ll-1;}
+        }
+        var i;
+        clearlayer1(ctxs);
+        clearlayer1(ctxbs);
+        for (i=0; i < data1.length; i++){arx[i]=data1[i][0];ary[i]=data1[i][1];} 
+        blyi = getMinOfArray(ary);
+        for (i=0; i < data1.length; i++){ary[i] = ary[i] - blyi;}
+        bhyi = getMaxOfArray(ary);
+        for (i=0; i < data1.length; i++){ary[i] = ary[i]*100/bhyi;}
+        if (arx[Math.round(arx.length/2)] < 2) {for (i = 0; i < data1.length; i++) {arx[i]=arx[i]*1000;}
+			document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='color:#e6b800; font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" +
+            ">'mum' scale has converted to 'nm' scale;</p>" ;
+		}
+        if (arx[Math.round(arx.length/2)] > 10000) {for (i = 0; i < data1.length; i++) {arx[i] = Math.round(10000000*100/arx[i])/100;}
+			document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='color:#e6b800; font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" +
+            ">'cm-1' scale has converted to 'nm' scale;</p>";
+		}
+        if (arx[Math.round(arx.length/2)] > arx[Math.round(arx.length/2)+5]) {for (i = 0; i < arx.length; i++) {dbarx[i] = arx[arx.length - 1 - i]; dbary[i] = ary[arx.length - 1 - i];} for (i = 0; i < arx.length; i++) {arx[i] = dbarx[i]; ary[i] = dbary[i]; }}
+        blyi = getMinOfArray(ary);
+        bhyi = getMaxOfArray(ary);
+        bhyi = bhyi + 0.2*(bhyi-blyi)/2;
+        if (findv(arx,780)==-1) {bhxw = getMaxOfArray(arx);ixmax = arx.length-1;} else {bhxw = 780;ixmax = findv(arx,780);}
+        if (findv(arx,380)==-1) {blxw = getMinOfArray(arx);ixmin = 0;} else {blxw = 380;ixmin = findv(arx,380);}
+        amin = Math.round(arx[ixmin]*1000)/1000; 
+        amax = Math.round(arx[ixmax]*1000)/1000;
+        bmin = Math.round(ary[ixmin]*1000)/1000; 
+        bmax = Math.round(ary[ixmax]*1000)/1000;
+        if (isNaN(amin)|isNaN(amax)|isNaN(bmin)|isNaN(bmax)) {
+            document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='color:red; font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" +
+            "ERROR: File " + filename + " is not correct. Please, use two-columns PL spectra data files with .txt or .csv extensions." + 
+            "Note that comma ',' is default string delimiter (specifying delimiter is available in the Settings). Data should be in 'nm', 'mum' or 'cm-1' scale and match with the visible region (400 - 700 nm).</p>"
+        }
+        redraw(cs, ctxs, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin);
+        drawbaseline(cbs, ctxbs, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin, amin, bmin, amax, bmax);
+        v = 0;
+    }
+	
+    reader.readAsText(file);
+	} else {
+		document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='color:red; font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" +
+		"ERROR: File " + filename + " is not correct. Please, use two-columns PL spectra data files with .txt or .csv extensions." 
+	}
+});
+
+
+
+
+
+//find index of element that is close to value
+
+function findv(array, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (Math.abs(Math.round(array[i]*100)/100 - value)< 0.5) {return i;}
+    }
+    return -1;
+}
  
 
+function delimiterspecify() { 
+    if (document.getElementById("delimiter").value == '') {delimiter = ',';
+        document.getElementById('m2').innerHTML =document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' >Now delimiter is "+ '"' + delimiter + '"' +"</p>";
+    } else {
+        delimiter = document.getElementById("delimiter").value;
+        document.getElementById('m2').innerHTML =document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' >Now delimiter is "+ '"' + delimiter + '"' +"</p>";
+    }
+}
+
+function removelog() {
+    document.getElementById('m2').innerHTML = "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' ></p>";
+}
+ 
+// clear layer
+
+function clearlayer1(contxt) {
+    contxt.clearRect(0, 0, cs.width, cs.height);
+}
+
+//Scale transformation functions
+
+function pxw(x) {
+    var x;
+    return ((x-blxw) * (cs.width - 0.07 * cs.width) / (bhxw - blxw)) + 0.07 * cs.width;
+}
+
+function rpxw(x) {
+    var x;
+    return ((x - 0.07 * cs.width) * (bhxw - blxw) / (cs.width - 0.07 * cs.width)) + blxw;
+}
+
+function pyi(y) {
+    return cs.height - 0.07 * cs.height - (y-blyi) * (cs.height - 0.07 * cs.height) / (bhyi - blyi);
+}
+
+function rpyi(y) {
+    return (y - cs.height + 0.07 * cs.height) * (blyi - bhyi)/(cs.height - 0.07 * cs.height) + blyi;
+}
+
+// drawing bounds
+
+function drawbounds (xp,side) {
+    var side;
+    ctxbs.beginPath();
+    ctxbs.moveTo(xp,0);
+    ctxbs.lineTo(xp, pyi(blyi));
+    ctxbs.stroke();
+    ctxbs.globalAlpha = 0.2;
+    ctxbs.fillStyle = "#009999";
+    if (side == 1) {
+        ctxbs.fillRect(0.07 * cs.width,0,xp -0.07 * cs.width,cs.height - 0.07 * cs.height);
+    }
+    if (side == 0) {
+        ctxbs.fillRect(xp,0,700-xp,cs.height - 0.07 * cs.height);
+    }
+    ctxbs.stroke();
+    ctxbs.globalAlpha = 1;
+}
+
+
+cbs.addEventListener('mousemove', function(e) {
+    var rect = cbs.getBoundingClientRect();
+    mouse.x = (e.clientX - rect.left)*(cbs.width/(rect.right-rect.left));
+    mouse.y = (e.clientY - rect.top)*(cbs.height/(rect.bottom-rect.top));
+    drawpoint();
+}, false);
+
+
+var displayElements = function() {
+    if (v == 0 && u == 0) {
+        ctxbs.clearRect(0,0,700,500);
+        if (mouse.x < 700/2) {
+            amin = rpxw(mouse.x);
+            bmin = rpyi(mouse.y);
+            drawbaseline(cbs, ctxbs, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin, amin, bmin, amax, bmax);
+        } else {
+            amax = rpxw(mouse.x);
+            bmax = rpyi(mouse.y);
+            drawbaseline(cbs, ctxbs, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin, amin, bmin, amax, bmax);
+        }
+    } else {
+        if (Math.abs(mouse.x-pxw(arx[ixmin]))<10&&mouse.x>0.07 * cs.width+1&&mouse.x < pxw(arx[ixmax])-30) {
+            ctxbs.clearRect(0,0,700,500);
+            min = findv(arx,rpxw(mouse.x));
+            ixmin = min; 
+            drawbounds(mouse.x,1);
+            drawbounds(pxw(arx[ixmax]),0);
+        }
+        if (Math.abs(mouse.x-pxw(arx[ixmax]))<10&&mouse.x<700&&mouse.x > pxw(arx[ixmin])+30) {
+            ctxbs.clearRect(0,0,700,500);
+            max = findv(arx,rpxw(mouse.x));
+            ixmax = max; 
+            drawbounds(mouse.x,0);
+            drawbounds(pxw(arx[ixmin]),1);
+        }
+    }
+    if (u == 1) {
+        if (mouse.x > x0t&& mouse.y > y0t){
+            ctxbounds.clearRect(0,0,700,500);
+            ctxbounds.globalAlpha = 0.2;
+            ctxbounds.fillStyle = "#009999";
+            ctxbounds.fillRect(x0t,y0t,Math.abs(x0t - mouse.x),Math.abs(y0t - mouse.y));
+            ctxbounds.stroke();
+            ctxbounds.globalAlpha = 1;
+        }
+        if (mouse.x > x0t&& mouse.y <= y0t){
+            ctxbounds.clearRect(0,0,700,500);
+            ctxbounds.globalAlpha = 0.2;
+            ctxbounds.fillStyle = "#009999";
+            ctxbounds.fillRect(x0t,y0t - Math.abs(y0t - mouse.y),Math.abs(x0t - mouse.x),Math.abs(y0t - mouse.y));
+            ctxbounds.stroke();
+            ctxbounds.globalAlpha = 1;
+        }
+        if (mouse.x < x0t&& mouse.y <= y0t){
+            ctxbounds.clearRect(0,0,700,500);
+            ctxbounds.globalAlpha = 0.2;
+            ctxbounds.fillStyle = "#009999";
+            ctxbounds.fillRect(mouse.x,mouse.y,Math.abs(x0t - mouse.x),Math.abs(y0t - mouse.y));
+            ctxbounds.stroke();
+            ctxbounds.globalAlpha = 1;
+        }
+        if (mouse.x < x0t&& mouse.y > y0t){
+            ctxbounds.clearRect(0,0,700,500);
+            ctxbounds.globalAlpha = 0.2;
+            ctxbounds.fillStyle = "#009999";
+            ctxbounds.fillRect(mouse.x,mouse.y - Math.abs(y0t - mouse.y),Math.abs(x0t - mouse.x),Math.abs(y0t - mouse.y));
+            ctxbounds.stroke();
+            ctxbounds.globalAlpha = 1;
+        }
+    }
+}
+
+
+cbs.addEventListener('mousedown', function(e) {
+    x0t = mouse.x;
+    y0t = mouse.y;
+    cbs.addEventListener('mousemove', displayElements, false);
+}, false);
+
+
+
+cbs.addEventListener('mouseup', function() {
+    if (u == 1) {
+        if (u == 1) {
+            ctxbounds.clearRect(0,0,700,500); 
+            if (x0t < mouse.x){
+                blxw = Math.round(rpxw(Math.round(x0t)));
+                bhxw = Math.round(rpxw(Math.round(mouse.x)));
+            } else {
+                blxw = Math.round(rpxw(Math.round(mouse.x)));
+                bhxw = Math.round(rpxw(Math.round(x0t)));
+            }
+            if (y0t < mouse.y) {
+                blyi = Math.round(rpyi(Math.round(mouse.y)));
+                bhyi = Math.round(rpyi(Math.round(y0t)));
+            } else {
+                blyi = Math.round(rpyi(Math.round(y0t)));
+                bhyi = Math.round(rpyi(Math.round(mouse.y)));
+            }
+            ctxbs.clearRect(0,0,700,500);
+            redraw(cs, ctxs, arx, ary, blxw, bhxw, blyi, bhyi, ixmax, ixmin);
+        }
+    }
+    cbs.removeEventListener('mousemove', displayElements, false);
+}, false);
+
+
+function getMaxOfArray(numArray) {
+    return Math.max.apply(null, numArray);
+}
+
+function getMinOfArray(numArray) {
+    return Math.min.apply(null, numArray);
+}
+
+
+function calcXYZ(){
+    var SUMX = 0, SUMY = 0, SUMZ = 0;
+    var SUMXYZ = 1;
+    for (i = ixmin; i < ixmax; i = i + 1) {
+        SUMX = SUMX+ary[i]*xResp(arx[i])*Math.abs(arx[i+1]-arx[i]);
+        SUMY = SUMY+ary[i]*yResp(arx[i])*Math.abs(arx[i+1]-arx[i]);
+        SUMZ = SUMZ+ary[i]*zResp(arx[i])*Math.abs(arx[i+1]-arx[i]);
+    }
+    SUMXYZ = SUMX + SUMY + SUMZ;
+    document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<hr>";
+    document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" + filename + "</p>";
+    document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' > From " + Math.round(arx[ixmin]*100)/100 + " nm to " + Math.round(arx[ixmax]*100)/100 + " nm </p>";
+    document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" + "X = " + Math.round(SUMX*100)/100 + ", " + "Y = " + Math.round(SUMY*100)/100 + ", " + "Z = " + Math.round(SUMZ*100)/100 + "</p>";
+    document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<p style='font-family: Consolas; margin-top:5px; margin-bottom:5px;' >" + "x = " + Math.round(SUMX*10000/SUMXYZ)/10000 + ", " + "y = " + Math.round(SUMY*10000/SUMXYZ)/10000 + "</p>";
+    document.getElementById('m2').innerHTML = document.getElementById('m2').innerHTML + "<hr>";
+	pResults2(Math.round(SUMX*10000/SUMXYZ)/10000, Math.round(SUMY*10000/SUMXYZ)/10000);
+}
+
+
+function CSVToArray( strData, strDelimiter ){
+    strDelimiter = (strDelimiter || ",");
+    var objPattern = new RegExp(
+        (
+            // Delimiters.
+            "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+            // Quoted fields.
+            "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+            // Standard fields.
+            "([^\"\\" + strDelimiter + "\\r\\n]*))"
+        ),
+        "gi"
+    );
+    // Create an array to hold our data. Give the array
+    // a default empty first row.
+    var arrData = [[]];
+    // Create an array to hold our individual pattern
+    // matching groups.
+    var arrMatches = null;
+    // Keep looping over the regular expression matches
+    // until we can no longer find a match.
+    while (arrMatches = objPattern.exec( strData )){
+        // Get the delimiter that was found.
+        var strMatchedDelimiter = arrMatches[ 1 ];
+        // Check to see if the given delimiter has a length
+        // (is not the start of string) and if it matches
+        // field delimiter. If id does not, then we know
+        // that this delimiter is a row delimiter.
+        if (
+            strMatchedDelimiter.length &&
+            strMatchedDelimiter !== strDelimiter
+        ){
+            // Since we have reached a new row of data,
+            // add an empty row to our data array.
+            arrData.push( [] );
+        }
+        var strMatchedValue;
+        // Now that we have our delimiter out of the way,
+        // let's check to see which kind of value we
+        // captured (quoted or unquoted).
+        if (arrMatches[ 2 ]){
+            // We found a quoted value. When we capture
+            // this value, unescape any double quotes.
+            strMatchedValue = arrMatches[ 2 ].replace(
+                new RegExp( "\"\"", "g" ),
+                "\""
+            );
+        } else {
+            // We found a non-quoted value.
+            strMatchedValue = arrMatches[ 3 ];
+        }
+        // Now that we have our value string, let's add
+        // it to the data array.
+        arrData[ arrData.length - 1 ].push( strMatchedValue );
+    }
+    // Return the parsed data.
+    return( arrData );
+}
+
+</script>
+ 
 </body>
 
 </html>
