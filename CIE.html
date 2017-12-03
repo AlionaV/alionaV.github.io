@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
+
+
+
 </script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<style>
+
+
+
+    
+    <style>
+
 input[type="file"]{
     display: none;
 }
@@ -270,84 +280,53 @@ p.submain{font-size: 30px;margin:1px;}
 }
 
 
-@media screen and (max-width: 490px) {
-    .container{
-        margin-left: 5px; 
-        margin-right: 5px; 
-        margin-top: 10px; 
-        padding-top: 20px;
-    }
-
-    .panel {
-        padding-left: 10px;
-    }
-
-
-    .panel-text {
-        padding-left: 10px;
-        padding-top: 20px
-    }
-
-    .adj {width: 99vw;}
-    div.form {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-        max-width: 95vw; 
-        font-size: large;
-    }
-
-    p.main{font-size:30px;}
-
-    p.submain{font-size: 20px;}
-
-    .panel {
-        padding-top: 10px;
-        height: 100px;
-        padding-left: 10px;
-    }
-
-    .mobile {
-        display:block;
-        width:100%!important
-    }
-
-    .content {
-            max-width: 99vw;
+@media screen and (max-width: 500px) {
+        .container{margin-left: 5px; margin-right: 5px; margin-top: 10px; padding-top: 20px;}
+         div.form {
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
+                width: 85vw; 
+                font-size: large;
         }
-
-    #stage {
-        width: 100vw;
-        height: 100vw;
-        position: relative;
+        .panel {
+                padding-left: 10px;
+        }	
+        .panel-text {
+                padding-left: 10px;
+                padding-top: 20px
+        }	
+        .adj {width: 99vw;}
     }
-
-    canvas { 
-        position: absolute; 
-        cursor: pointer;
-        width: 95vw;
-        height: 95vw; 
+    @media screen and (max-width: 650px) {
+        p.main{font-size:30px;}
+        p.submain{font-size: 20px;}
+        .panel {
+            padding-top: 10px;
+            height: 100px;
+            padding-left: 10px;		
+        }	
+    
+        .mobile{display:block;
+                width:100%!important}
+        .content{max-width: 99vw;}		
+        #stage {
+             width: 100vw;                     
+             height: 100vw;
+             position: relative;
+                }
+    
+        canvas { position: absolute; 
+                 cursor: pointer;
+                 width: 95vw;             
+                 height: 95vw;      
+                }
     }
-
-}
-
-@media screen and (max-width: 800px) {
-    .hide-on-small{
-        display:none;
+    
+    @media screen and (max-width: 360px) {
+        .content{max-width: 350px;}		
     }
-}
-
-
-@media screen and (max-width: 490px) {
-
-  
-}
-
-
-
-@media screen and (max-width: 360px) {
-    .content{max-width: 350px;}
-}
+    
 
 
 
